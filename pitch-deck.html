@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowPilot — Plano de Negocio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --cyan:#06b6d4;--cyan-l:#67e8f9;--cyan-d:#0891b2;--cyan-glow:rgba(6,182,212,.35);
+    --purp:#8b5cf6;--purp-l:#a78bfa;--purp-glow:rgba(139,92,246,.25);
+    --navy:#050a14;--card:#0a1225;--card2:#0d1730;--card3:#111d3a;
+    --fg:#e8ecf4;--dim:rgba(232,236,244,.55);--muted:rgba(232,236,244,.3);--ghost:rgba(232,236,244,.15);
+    --green:#22c55e;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;
+    --wa:#25D366;--ig:#E1306C;
+    --f:Inter,-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:var(--f);background:var(--navy);color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:rgba(6,182,212,.25)}
+  ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.06);border-radius:4px}
+
+  /* ═══ NAV ═══ */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,10,20,.9);backdrop-filter:blur(24px);border-bottom:1px solid rgba(6,182,212,.06);padding:0 2rem}
+  .nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+  .nav-logo{font-weight:800;font-size:.95rem}.nav-logo span{color:var(--cyan)}
+  .nav-links{display:flex;gap:1.5rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--cyan)}
+  .pg{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+  /* ═══ SLIDE ═══ */
+  .slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 0;position:relative;border-bottom:1px solid rgba(6,182,212,.04)}
+  .slide-sm{min-height:auto;padding:5rem 0}
+  .tag{font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:.5rem;text-shadow:0 0 12px var(--cyan-glow)}
+  .h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;letter-spacing:-.04em;line-height:1.08}
+  .h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.035em;line-height:1.12}
+  .h3{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;line-height:1.25}
+  .grad{background:linear-gradient(135deg,#fff 40%,var(--cyan-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .grad2{background:linear-gradient(135deg,var(--cyan-l),var(--cyan),var(--purp));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{font-size:1.1rem;color:var(--dim);max-width:600px;line-height:1.8;margin-top:1rem}
+
+  /* ═══ CARDS ═══ */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.15rem;margin-top:2.5rem}
+  .card{border-radius:16px;padding:1.75rem;background:var(--card);border:1px solid rgba(6,182,212,.06);transition:border-color .3s,box-shadow .3s}
+  .card:hover{border-color:rgba(6,182,212,.12);box-shadow:0 0 30px rgba(6,182,212,.04)}
+  .card h4{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+  .card p{font-size:.88rem;color:var(--dim);line-height:1.7}
+  .card-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem}
+
+  /* ═══ METRICS ═══ */
+  .metric-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-top:2.5rem}
+  .metric{text-align:center;padding:2rem 1.5rem;border-radius:16px;background:var(--card);border:1px solid rgba(6,182,212,.06)}
+  .metric .num{font-size:2.5rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.25rem}
+  .metric .num.cyan{color:var(--cyan)}
+  .metric .num.green{color:var(--green)}
+  .metric .num.purp{color:var(--purp)}
+  .metric .num.amber{color:var(--amber)}
+  .metric .lbl{font-size:.78rem;color:var(--dim);line-height:1.5}
+
+  /* ═══ HERO ═══ */
+  .hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+  .hero-orb.c{width:700px;height:700px;background:radial-gradient(circle,rgba(6,182,212,.1),rgba(139,92,246,.03),transparent 70%);top:-250px;left:50%;transform:translateX(-50%)}
+  .hero-orb.p{width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,.06),transparent 70%);bottom:-120px;right:-60px}
+
+  /* ═══ PROBLEM BARS ═══ */
+  .pain{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-radius:12px;background:var(--card);border:1px solid rgba(239,68,68,.08);margin-bottom:.75rem;transition:border-color .2s}
+  .pain:hover{border-color:rgba(239,68,68,.2)}
+  .pain-icon{min-width:36px;height:36px;border-radius:8px;background:rgba(239,68,68,.08);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+  .pain h5{font-size:.9rem;font-weight:600}
+  .pain p{font-size:.8rem;color:var(--dim);margin-top:.1rem}
+
+  /* ═══ TIMELINE ═══ */
+  .timeline{margin-top:2.5rem;position:relative;padding-left:2rem}
+  .timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--cyan),var(--purp),var(--green))}
+  .tl-item{position:relative;padding-bottom:2rem}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-dot{position:absolute;left:-2rem;top:4px;width:16px;height:16px;border-radius:50%;border:2px solid var(--cyan);background:var(--navy)}
+  .tl-item:nth-child(2) .tl-dot{border-color:var(--purp)}
+  .tl-item:nth-child(3) .tl-dot{border-color:var(--blue)}
+  .tl-item:nth-child(4) .tl-dot{border-color:var(--green)}
+  .tl-phase{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:.25rem}
+  .tl-item:nth-child(2) .tl-phase{color:var(--purp)}
+  .tl-item:nth-child(3) .tl-phase{color:var(--blue)}
+  .tl-item:nth-child(4) .tl-phase{color:var(--green)}
+  .tl-title{font-size:1.05rem;font-weight:700;margin-bottom:.25rem}
+  .tl-desc{font-size:.85rem;color:var(--dim);line-height:1.7}
+
+  /* ═══ COMPARISON TABLE ═══ */
+  .comp-table{width:100%;border-collapse:collapse;margin-top:2rem;font-size:.85rem}
+  .comp-table th{text-align:left;padding:.75rem 1rem;font-weight:600;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.06)}
+  .comp-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,.03);color:var(--dim)}
+  .comp-table tr:hover td{background:rgba(6,182,212,.02)}
+  .comp-table .feature{color:var(--fg);font-weight:500}
+  .check{color:var(--green);font-weight:700}
+  .cross{color:rgba(239,68,68,.5);font-weight:700}
+  .partial{color:var(--amber);font-weight:700}
+  .unique{background:rgba(6,182,212,.04);font-weight:600}
+  .unique .feature{color:var(--cyan)}
+
+  /* ═══ PRICING ═══ */
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+  .plan{border-radius:20px;padding:2rem;background:var(--card);border:1px solid rgba(255,255,255,.04);position:relative}
+  .plan.featured{border-color:rgba(6,182,212,.2);box-shadow:0 0 40px rgba(6,182,212,.06)}
+  .plan-badge{position:absolute;top:-10px;right:1.5rem;padding:.2rem .75rem;border-radius:100px;background:linear-gradient(135deg,var(--cyan-d),var(--cyan));font-size:.65rem;font-weight:700;color:#fff;letter-spacing:.04em}
+  .plan-name{font-size:.85rem;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+  .plan-price{font-size:2.5rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.25rem}
+  .plan-price span{font-size:1rem;font-weight:500;color:var(--muted)}
+  .plan-desc{font-size:.82rem;color:var(--dim);margin-bottom:1.25rem;line-height:1.6}
+  .plan-features{list-style:none}
+  .plan-features li{padding:.3rem 0 .3rem 1.1rem;position:relative;font-size:.82rem;color:var(--dim)}
+  .plan-features li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;font-size:.78rem}
+  .plan.featured .plan-features li::before{color:var(--cyan)}
+
+  /* ═══ AGENT FLOW ═══ */
+  .flow-row{display:flex;align-items:center;gap:0;margin-top:2.5rem;flex-wrap:wrap;justify-content:center}
+  .flow-node{padding:1rem 1.5rem;border-radius:14px;text-align:center;min-width:140px;border:1px solid rgba(255,255,255,.06);background:var(--card)}
+  .flow-node h5{font-size:.82rem;font-weight:700;margin-top:.4rem}
+  .flow-node p{font-size:.68rem;color:var(--dim);margin-top:.15rem}
+  .flow-arrow{font-size:1.2rem;color:var(--muted);padding:0 .5rem}
+
+  /* ═══ FOOTER ═══ */
+  footer{text-align:center;padding:3rem 0;color:var(--muted);font-size:.82rem;border-top:1px solid rgba(6,182,212,.04)}
+  footer strong{color:rgba(232,236,244,.5)}
+
+  /* ═══ CTA ═══ */
+  .cta-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.75rem;border-radius:100px;background:linear-gradient(135deg,var(--cyan-d),var(--cyan));font-size:.88rem;font-weight:600;color:#fff;text-decoration:none;box-shadow:0 0 24px rgba(6,182,212,.2);transition:box-shadow .3s,transform .2s;border:none;cursor:pointer}
+  .cta-btn:hover{box-shadow:0 0 40px rgba(6,182,212,.3);transform:translateY(-1px)}
+
+  /* ═══ MISC ═══ */
+  .badge{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .65rem;border-radius:100px;font-size:.68rem;font-weight:600;letter-spacing:.04em}
+  .badge.cyan{background:rgba(6,182,212,.1);color:var(--cyan);border:1px solid rgba(6,182,212,.15)}
+  .badge.green{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.15)}
+  .badge.purp{background:rgba(139,92,246,.1);color:var(--purp);border:1px solid rgba(139,92,246,.15)}
+  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(6,182,212,.1),transparent);margin:2rem 0}
+  .mono{font-family:var(--mono)}
+
+  @media(max-width:768px){
+    .grid2,.grid3,.grid4,.pricing-grid{grid-template-columns:1fr}
+    .flow-row{flex-direction:column}.flow-arrow{transform:rotate(90deg)}
+    nav .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo">Flow<span>Pilot</span></div>
+    <ul class="nav-links">
+      <li><a href="#problem">Problema</a></li>
+      <li><a href="#solution">Solucao</a></li>
+      <li><a href="#market">Mercado</a></li>
+      <li><a href="#product">Produto</a></li>
+      <li><a href="#agents">IA</a></li>
+      <li><a href="#model">Modelo</a></li>
+      <li><a href="#compete">Competicao</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#financials">Financeiro</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="pg">
+
+<!-- ═══════════════════════════════════════════════════
+     01. COVER
+     ═══════════════════════════════════════════════════ -->
+<section class="slide" style="text-align:center;align-items:center">
+  <div class="hero-orb c"></div>
+  <div class="hero-orb p"></div>
+  <div style="position:relative;z-index:1">
+    <div class="badge cyan" style="margin-bottom:2rem">Plano de Negocio 2026</div>
+    <!-- Logo -->
+    <svg viewBox="0 0 420 80" width="280" style="margin-bottom:1.5rem" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22d3ee"/><stop offset="50%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient><filter id="gf"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g transform="translate(10,8)"><circle cx="32" cy="32" r="28" fill="none" stroke="url(#lg1)" stroke-width="1.5" opacity=".2" filter="url(#gf)"/><path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" filter="url(#gf)"/><path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" opacity=".7" filter="url(#gf)"/><path d="M34 24 C40 28,44 32,48 36 C44 40,40 42,34 46" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" opacity=".45" filter="url(#gf)"/><circle cx="32" cy="32" r="4" fill="#06b6d4" filter="url(#gf)"/></g>
+      <text x="82" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#e8ecf4">Flow</text><text x="190" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="url(#lg1)">Pilot</text>
+    </svg>
+    <h1 class="h1"><span class="grad">Automacao Inteligente</span><br>para WhatsApp & Instagram</h1>
+    <p class="sub" style="margin:1rem auto 2.5rem;text-align:center;max-width:520px">A plataforma que substitui 5 ferramentas por uma — com agentes de IA que qualificam, vendem e retêm clientes 24/7.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <div class="badge cyan">SaaS B2B</div>
+      <div class="badge purp">IA Generativa</div>
+      <div class="badge green">Mercado BR R$500K+ MRR</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     02. PROBLEM
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="problem">
+  <div class="tag">O Problema</div>
+  <h2 class="h2"><span class="grad">Infoprodutores perdem vendas</span><br>todos os dias.</h2>
+  <p class="sub">O vendedor digital brasileiro usa 5+ ferramentas desconectadas para fazer o que deveria ser simples: conversar, qualificar e vender.</p>
+
+  <div style="margin-top:2.5rem;max-width:650px">
+    <div class="pain"><div class="pain-icon">1</div><div><h5>Fragmentacao de ferramentas</h5><p>SendFlow + ManyChat + ChatGPT + Hotmart + Planilhas = caos operacional</p></div></div>
+    <div class="pain"><div class="pain-icon">2</div><div><h5>WhatsApp e Instagram desconectados</h5><p>Lead no Instagram nao chega no WhatsApp. Conversao morre no meio do caminho.</p></div></div>
+    <div class="pain"><div class="pain-icon">3</div><div><h5>Zero inteligencia automatica</h5><p>Respostas manuais a cada lead. Impossivel escalar sem contratar equipe.</p></div></div>
+    <div class="pain"><div class="pain-icon">4</div><div><h5>Risco de banimento</h5><p>Envio agressivo sem compliance = numero bloqueado = negocio parado.</p></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     03. SOLUTION
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="solution">
+  <div class="tag">A Solucao</div>
+  <h2 class="h2"><span class="grad2">Uma plataforma. Tudo conectado.</span></h2>
+  <p class="sub">FlowPilot unifica WhatsApp + Instagram + IA em um unico painel — com agentes autonomos que trabalham enquanto voce dorme.</p>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="card-icon" style="background:rgba(37,211,102,.1);color:var(--wa)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+      <h4>WhatsApp Automation</h4>
+      <p>Grupos, mensagens em massa, Spintax, agendamento, bot inteligente, auto-scaling de grupos.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(225,48,108,.1);color:var(--ig)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg></div>
+      <h4>Instagram Automation</h4>
+      <p>Comment-to-DM, keyword triggers, follow-to-DM, variacoes anti-spam por IA.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(6,182,212,.1);color:var(--cyan)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <h4>Bridge Cross-Channel</h4>
+      <p>Lead do Instagram capturado automaticamente no WhatsApp. Feature UNICA no mercado.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(139,92,246,.1);color:var(--purp)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg></div>
+      <h4>Agentes de IA</h4>
+      <p>SDR, BDR, Closer e CS — 4 agentes autonomos que qualificam, vendem e retém.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(59,130,246,.1);color:var(--blue)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4>Compliance Anti-Ban</h4>
+      <p>Rate limiting adaptativo, health monitoring, variacoes automaticas. Zero banimento.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(245,158,11,.1);color:var(--amber)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+      <h4>30+ Webhooks</h4>
+      <p>Hotmart, Kiwify, Eduzz, Stripe, Guru e mais. Acoes automaticas pos-compra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     04. MARKET
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="market">
+  <div class="tag">Oportunidade de Mercado</div>
+  <h2 class="h2"><span class="grad">Mercado massivo.</span> Timing perfeito.</h2>
+
+  <div class="metric-row">
+    <div class="metric"><div class="num cyan">500K+</div><div class="lbl">Infoprodutores ativos<br>no Brasil</div></div>
+    <div class="metric"><div class="num green">165M</div><div class="lbl">Usuarios WhatsApp<br>no Brasil</div></div>
+    <div class="metric"><div class="num purp">134M</div><div class="lbl">Usuarios Instagram<br>no Brasil</div></div>
+    <div class="metric"><div class="num amber">5+</div><div class="lbl">Ferramentas que cada<br>vendedor usa hoje</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:3rem">
+    <div class="card">
+      <h4 style="color:var(--cyan)">TAM — Mercado Total</h4>
+      <p style="font-size:1.8rem;font-weight:900;margin:.5rem 0;color:var(--fg)">R$ 1.5B+<span style="font-size:.9rem;font-weight:400;color:var(--dim)">/ano</span></p>
+      <p>500K produtores digitais x R$250/mes media de gastos com ferramentas de automacao.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--green)">SAM — Mercado Acessivel</h4>
+      <p style="font-size:1.8rem;font-weight:900;margin:.5rem 0;color:var(--fg)">R$ 300M+<span style="font-size:.9rem;font-weight:400;color:var(--dim)">/ano</span></p>
+      <p>100K produtores que ja usam WhatsApp como canal principal de vendas e buscam automacao.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     05. PRODUCT
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="product">
+  <div class="tag">Produto</div>
+  <h2 class="h2"><span class="grad">Tudo que o SendFlow faz.</span><br>Mais Instagram. Mais IA.</h2>
+  <p class="sub">Paridade com SendFlow + features exclusivas que ninguem tem.</p>
+
+  <div class="grid2" style="margin-top:2.5rem">
+    <div>
+      <h3 style="margin-bottom:1.25rem;color:var(--cyan)">Core Features</h3>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="padding:.6rem 1rem;border-radius:8px;background:var(--card);border-left:2px solid var(--cyan);font-size:.88rem"><strong>Campanhas</strong> — Workspace isolado por lancamento</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:var(--card);border-left:2px solid var(--cyan);font-size:.88rem"><strong>Motor de Acoes</strong> — 35+ tipos de acao automatizada</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:var(--card);border-left:2px solid var(--cyan);font-size:.88rem"><strong>Flow Builder</strong> — Automacoes visuais drag-and-drop</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:var(--card);border-left:2px solid var(--cyan);font-size:.88rem"><strong>Templates</strong> — Biblioteca reutilizavel com pastas</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:var(--card);border-left:2px solid var(--cyan);font-size:.88rem"><strong>Lead Scoring</strong> — Pontuacao automatica por engajamento</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:var(--card);border-left:2px solid var(--cyan);font-size:.88rem"><strong>Blacklists + Anti-Spam</strong> — Protecao completa</div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-bottom:1.25rem;color:var(--purp)">Exclusivos FlowPilot</h3>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="padding:.6rem 1rem;border-radius:8px;background:rgba(139,92,246,.04);border-left:2px solid var(--purp);font-size:.88rem"><strong>Instagram Automation</strong> — Nenhum concorrente tem</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:rgba(139,92,246,.04);border-left:2px solid var(--purp);font-size:.88rem"><strong>Bridge IG → WA</strong> — Feature UNICA mundial</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:rgba(139,92,246,.04);border-left:2px solid var(--purp);font-size:.88rem"><strong>4 Agentes de IA</strong> — Time de vendas autonomo</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:rgba(139,92,246,.04);border-left:2px solid var(--purp);font-size:.88rem"><strong>AI Copywriter</strong> — Copy por estagio de lancamento</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:rgba(139,92,246,.04);border-left:2px solid var(--purp);font-size:.88rem"><strong>Knowledge Base</strong> — IA treinada no seu produto</div>
+        <div style="padding:.6rem 1rem;border-radius:8px;background:rgba(139,92,246,.04);border-left:2px solid var(--purp);font-size:.88rem"><strong>Tracking 50+ eventos</strong> — Jornada completa do lead</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     06. AI AGENTS
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="agents">
+  <div class="tag">Agentes de IA</div>
+  <h2 class="h2"><span class="grad2">Seu time de vendas.<br>Trabalhando 24/7.</span></h2>
+  <p class="sub">4 agentes autonomos que qualificam, prospectam, vendem e retêm — alimentados por Claude (Anthropic) + LangGraph.</p>
+
+  <div class="flow-row">
+    <div class="flow-node" style="border-color:rgba(6,182,212,.15)"><div style="font-size:1.5rem">🎯</div><h5 style="color:var(--cyan)">SDR Agent</h5><p>Qualificacao</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node" style="border-color:rgba(59,130,246,.15)"><div style="font-size:1.5rem">🚀</div><h5 style="color:var(--blue)">BDR Agent</h5><p>Prospeccao</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node" style="border-color:rgba(139,92,246,.15)"><div style="font-size:1.5rem">💰</div><h5 style="color:var(--purp)">Closer Agent</h5><p>Vendas</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-node" style="border-color:rgba(34,197,94,.15)"><div style="font-size:1.5rem">❤️</div><h5 style="color:var(--green)">CS Agent</h5><p>Retencao</p></div>
+  </div>
+
+  <div class="grid4" style="margin-top:2rem">
+    <div class="card" style="border-top:2px solid var(--cyan)">
+      <h4 style="color:var(--cyan)">SDR</h4>
+      <p>Qualifica leads via conversa. 5 estagios: saudacao → qualificacao → dor → interesse → handoff. Extrai dados BANT. Score >= 70 → Closer.</p>
+    </div>
+    <div class="card" style="border-top:2px solid var(--blue)">
+      <h4 style="color:var(--blue)">BDR</h4>
+      <p>Prospeccao ativa em listas frias. Personaliza cada mensagem com IA. Follow-ups D+1, D+3, D+7. Detecta interesse nas respostas.</p>
+    </div>
+    <div class="card" style="border-top:2px solid var(--purp)">
+      <h4 style="color:var(--purp)">Closer</h4>
+      <p>7 estagios de venda: rapport → apresentacao → prova social → objecoes → urgencia → fechamento → follow-up. Gera links de pagamento.</p>
+    </div>
+    <div class="card" style="border-top:2px solid var(--green)">
+      <h4 style="color:var(--green)">CS</h4>
+      <p>Onboarding automatico. Suporte via knowledge base. Detecta insatisfacao → escalation. Sugere upsell apos X dias.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:2rem;text-align:center;border-color:rgba(6,182,212,.1)">
+    <p style="font-size:.85rem;color:var(--dim)">Custo por lead processado pela IA</p>
+    <p style="font-size:2.5rem;font-weight:900;color:var(--cyan);margin:.5rem 0">R$ 0,01</p>
+    <p style="font-size:.82rem;color:var(--muted)">10.000 leads/mes = ~R$ 100 em custo de LLM</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     07. BUSINESS MODEL
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="model">
+  <div class="tag">Modelo de Negocio</div>
+  <h2 class="h2"><span class="grad">SaaS por assinatura.</span><br>Recorrencia mensal.</h2>
+
+  <div class="pricing-grid">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">R$97<span>/mes</span></div>
+      <div class="plan-desc">Para quem esta comecando. WhatsApp basico com automacoes.</div>
+      <ul class="plan-features">
+        <li>1 numero WhatsApp</li>
+        <li>Grupos ilimitados</li>
+        <li>Campanhas ilimitadas</li>
+        <li>Templates de mensagem</li>
+        <li>Webhooks (Hotmart, Kiwify)</li>
+        <li>Anti-spam basico</li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">POPULAR</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price" style="color:var(--cyan)">R$197<span>/mes</span></div>
+      <div class="plan-desc">Para lancamentos serios. WhatsApp + Instagram + IA.</div>
+      <ul class="plan-features">
+        <li>3 numeros WhatsApp</li>
+        <li>Instagram Automation</li>
+        <li>Bridge IG → WA</li>
+        <li>Flow Builder visual</li>
+        <li>AI Copywriter</li>
+        <li>SDR + Closer Agent</li>
+        <li>Lead Scoring avancado</li>
+        <li>30+ webhooks</li>
+      </ul>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Scale</div>
+      <div class="plan-price">R$397<span>/mes</span></div>
+      <div class="plan-desc">Para operacoes de escala. Todos os agentes + tracking.</div>
+      <ul class="plan-features">
+        <li>10 numeros WhatsApp</li>
+        <li>Tudo do Pro +</li>
+        <li>4 Agentes IA (SDR, BDR, Closer, CS)</li>
+        <li>Tracking 50+ eventos</li>
+        <li>Lead Scoring 3 camadas</li>
+        <li>Knowledge Base ilimitada</li>
+        <li>API publica</li>
+        <li>Suporte prioritario</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     08. COMPETITIVE
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="compete">
+  <div class="tag">Analise Competitiva</div>
+  <h2 class="h2"><span class="grad">Ninguem tem tudo.</span><br>FlowPilot tem.</h2>
+
+  <div style="overflow-x:auto;margin-top:2.5rem;border-radius:16px;border:1px solid rgba(255,255,255,.04)">
+    <table class="comp-table">
+      <thead>
+        <tr><th>Feature</th><th>SendFlow</th><th>ManyChat</th><th>ChatGPT</th><th style="color:var(--cyan)">FlowPilot</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="feature">WhatsApp Grupos</td><td class="check">✓</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td class="feature">WhatsApp 1x1</td><td class="check">✓</td><td class="partial">~</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td class="feature">Instagram DM</td><td class="cross">✕</td><td class="check">✓</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td class="feature">Instagram Comments</td><td class="cross">✕</td><td class="check">✓</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr class="unique"><td class="feature">Bridge IG → WA</td><td class="cross">✕</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓ UNICO</td></tr>
+        <tr><td class="feature">Flow Builder</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td class="feature">Campanhas / Launches</td><td class="check">✓</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr class="unique"><td class="feature">Agentes IA Autonomos</td><td class="cross">✕</td><td class="cross">✕</td><td class="partial">~</td><td class="check">✓ UNICO</td></tr>
+        <tr class="unique"><td class="feature">AI Copywriter por Estagio</td><td class="cross">✕</td><td class="cross">✕</td><td class="partial">~</td><td class="check">✓ UNICO</td></tr>
+        <tr><td class="feature">Lead Scoring</td><td class="check">✓</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓ 3 camadas</td></tr>
+        <tr><td class="feature">Webhooks Pagamento</td><td class="check">✓</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓ 30+</td></tr>
+        <tr><td class="feature">Anti-Ban Inteligente</td><td class="partial">~</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td class="feature" style="font-weight:700">Preco</td><td>$97-297</td><td>$15-99</td><td>$20</td><td style="color:var(--cyan);font-weight:700">R$97-397</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:2rem;border-color:rgba(6,182,212,.12);text-align:center">
+    <p style="font-size:1rem;color:var(--dim);margin-bottom:.5rem">Vantagem competitiva</p>
+    <p style="font-size:1.5rem;font-weight:800;letter-spacing:-.02em"><span style="color:var(--cyan)">3 features UNICAS</span> que nenhum concorrente oferece</p>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:.5rem">Bridge Cross-Channel + Agentes IA Autonomos + Copywriter por Estagio de Lancamento</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     09. ROADMAP
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="roadmap">
+  <div class="tag">Roadmap</div>
+  <h2 class="h2"><span class="grad">Execucao em 4 fases.</span></h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Fase 1 — Meses 1-3 (MVP)</div>
+      <div class="tl-title">SendFlow Parity + MVP</div>
+      <div class="tl-desc">Campanhas, Motor de Acoes, Templates, 6 webhooks, Flow Builder basico, Instagram automation, Bridge IG→WA. Meta: 100 beta users.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Fase 2 — Meses 4-6</div>
+      <div class="tl-title">AI Agent Squad</div>
+      <div class="tl-desc">SDR Agent, Closer Agent, Knowledge Base, Lead Scoring 3 camadas, Tracking 50+ eventos, 30+ webhooks. Meta: 500 users pagantes.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Fase 3 — Meses 7-9</div>
+      <div class="tl-title">Scale + Analytics</div>
+      <div class="tl-desc">BDR Agent, CS Agent, Analytics preditivo, Broadcasts 1x1, Deeplinks, API publica v1. Meta: 1.500 users pagantes.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Fase 4 — Meses 10-12</div>
+      <div class="tl-title">Domination</div>
+      <div class="tl-desc">White-label, Telegram, template marketplace, multi-number orchestrator, expansao LATAM. Meta: 3.000+ users, R$500K MRR.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     10. FINANCIALS
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="financials">
+  <div class="tag">Projecao Financeira</div>
+  <h2 class="h2"><span class="grad">R$ 500K MRR</span> no Ano 1.</h2>
+
+  <div class="metric-row">
+    <div class="metric"><div class="num cyan">3.000+</div><div class="lbl">Usuarios pagantes<br>meta Ano 1</div></div>
+    <div class="metric"><div class="num green">R$167</div><div class="lbl">Ticket medio<br>mensal</div></div>
+    <div class="metric"><div class="num purp">R$500K</div><div class="lbl">MRR target<br>mes 12</div></div>
+    <div class="metric"><div class="num amber">R$6M</div><div class="lbl">ARR projetado<br>Ano 1</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:3rem">
+    <div class="card">
+      <h4>Projecao de Crescimento</h4>
+      <div style="margin-top:1rem">
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Mes 3 (MVP)</span><span>100 users</span><span style="color:var(--cyan)">R$ 17K</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Mes 6</span><span>500 users</span><span style="color:var(--cyan)">R$ 84K</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Mes 9</span><span>1.500 users</span><span style="color:var(--cyan)">R$ 250K</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem"><span style="color:var(--dim)">Mes 12</span><span>3.000 users</span><span style="color:var(--green);font-weight:700">R$ 500K</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h4>Unit Economics</h4>
+      <div style="margin-top:1rem">
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Custo LLM / lead</span><span style="color:var(--cyan)">R$ 0,01</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Infra / user / mes</span><span style="color:var(--cyan)">~R$ 15</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Ticket medio</span><span style="color:var(--cyan)">R$ 167</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.03)"><span style="color:var(--dim)">Margem bruta</span><span style="color:var(--green);font-weight:700">~85%</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.85rem"><span style="color:var(--dim)">LTV estimado (12m)</span><span style="color:var(--green);font-weight:700">R$ 2.000+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     11. TECH STACK
+     ═══════════════════════════════════════════════════ -->
+<section class="slide slide-sm" id="tech">
+  <div class="tag">Stack Tecnologico</div>
+  <h2 class="h2"><span class="grad">Arquitetura para escala.</span></h2>
+
+  <div class="grid3">
+    <div class="card"><h4 style="color:var(--cyan)">Backend</h4><p><strong>NestJS + TypeScript</strong><br>PostgreSQL + Redis + BullMQ<br>Multi-tenancy com RLS<br>10K msgs/min capacity</p></div>
+    <div class="card"><h4 style="color:var(--purp)">Frontend</h4><p><strong>Next.js 14 + React</strong><br>Tailwind + shadcn/ui<br>Design System V2 premium<br>Zustand + React Query</p></div>
+    <div class="card"><h4 style="color:var(--green)">IA & Channels</h4><p><strong>Claude API (Anthropic)</strong><br>LangGraph (agent orchestration)<br>Baileys (WhatsApp)<br>Meta Graph API (Instagram)</p></div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;text-align:center;border-color:rgba(6,182,212,.08)">
+    <p style="font-size:.85rem;color:var(--dim)">Requisitos de Performance</p>
+    <div style="display:flex;justify-content:center;gap:3rem;margin-top:.75rem;flex-wrap:wrap">
+      <div><span style="font-size:1.5rem;font-weight:800;color:var(--cyan)">10K</span><br><span style="font-size:.72rem;color:var(--muted)">msgs/min</span></div>
+      <div><span style="font-size:1.5rem;font-weight:800;color:var(--green)">99.5%</span><br><span style="font-size:.72rem;color:var(--muted)">uptime SLA</span></div>
+      <div><span style="font-size:1.5rem;font-weight:800;color:var(--purp)">&lt;500ms</span><br><span style="font-size:.72rem;color:var(--muted)">API p95</span></div>
+      <div><span style="font-size:1.5rem;font-weight:800;color:var(--amber)">&lt;15min</span><br><span style="font-size:.72rem;color:var(--muted)">onboarding</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     12. CTA
+     ═══════════════════════════════════════════════════ -->
+<section class="slide" style="text-align:center;align-items:center">
+  <div class="hero-orb c"></div>
+  <div style="position:relative;z-index:1">
+    <div class="tag">Proximos Passos</div>
+    <h2 class="h1"><span class="grad2">O futuro da venda<br>digital e autonomo.</span></h2>
+    <p class="sub" style="text-align:center;margin:1.25rem auto 2.5rem">FlowPilot nao e mais uma ferramenta de automacao. E um time de vendas completo, alimentado por IA, trabalhando 24/7 no WhatsApp e Instagram.</p>
+
+    <div class="metric-row" style="max-width:700px;margin:0 auto 3rem">
+      <div class="metric" style="border-color:rgba(6,182,212,.12)"><div class="num cyan">R$500K</div><div class="lbl">MRR meta Ano 1</div></div>
+      <div class="metric" style="border-color:rgba(34,197,94,.12)"><div class="num green">3.000+</div><div class="lbl">Users pagantes</div></div>
+      <div class="metric" style="border-color:rgba(139,92,246,.12)"><div class="num purp">3</div><div class="lbl">Features UNICAS</div></div>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:.82rem;color:var(--muted);margin-top:2rem">flowpilot.com.br — contato@flowpilot.com.br</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="pg">
+    <strong>FlowPilot</strong> — Plano de Negocio — Marco 2026<br>
+    <span style="font-size:.75rem">Documento confidencial</span>
+  </div>
+</footer>
+
+</body>
+</html>
