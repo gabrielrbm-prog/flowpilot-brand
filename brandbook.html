@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowPilot — Brand Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ══════════════════════════════════════════════
+     RESET & BASE
+     ══════════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cyan-50:  #ecfeff;
+    --cyan-100: #cffafe;
+    --cyan-200: #a5f3fc;
+    --cyan-300: #67e8f9;
+    --cyan-400: #22d3ee;
+    --cyan-500: #06b6d4;
+    --cyan-600: #0891b2;
+    --cyan-700: #0e7490;
+    --cyan-800: #155e75;
+    --cyan-900: #164e63;
+    --cyan-950: #083344;
+
+    --navy-50:  #f0f4ff;
+    --navy-100: #d9e2fc;
+    --navy-200: #a3b8e8;
+    --navy-300: #7490d4;
+    --navy-400: #4a6bbf;
+    --navy-500: #2d4a8a;
+    --navy-600: #1e3566;
+    --navy-700: #142345;
+    --navy-800: #0f1a33;
+    --navy-850: #0c1528;
+    --navy-900: #0a1120;
+    --navy-950: #070d18;
+
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger:  #ef4444;
+    --info:    #3b82f6;
+    --whatsapp: #25D366;
+    --instagram: #E1306C;
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--navy-950);
+    color: #e8ecf4;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ══════════════════════════════════════════════
+     NAVIGATION
+     ══════════════════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(7, 13, 24, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 2rem;
+  }
+  nav .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  nav .nav-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+  nav .nav-logo span { color: var(--cyan-400); }
+  nav .nav-links { display: flex; gap: 2rem; list-style: none; }
+  nav .nav-links a {
+    color: rgba(232,236,244,0.6); text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; transition: color 0.2s; letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  nav .nav-links a:hover { color: var(--cyan-400); }
+
+  /* ══════════════════════════════════════════════
+     LAYOUT
+     ══════════════════════════════════════════════ */
+  .page { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+  section {
+    padding: 6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--cyan-500);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.15; margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-desc {
+    font-size: 1.1rem; color: rgba(232,236,244,0.55); max-width: 640px;
+    line-height: 1.8;
+  }
+
+  /* ══════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════ */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    position: relative; overflow: hidden; padding-top: 64px;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; top: 100px; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2);
+    font-size: 0.8rem; font-weight: 500; color: var(--cyan-400);
+    margin-bottom: 2rem; letter-spacing: 0.05em;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan-400);
+    box-shadow: 0 0 8px var(--cyan-400);
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900;
+    letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 1.5rem;
+  }
+  .hero h1 .flow { color: #fff; }
+  .hero h1 .pilot {
+    background: linear-gradient(135deg, var(--cyan-300), var(--cyan-500));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(6,182,212,0.3));
+  }
+  .hero-sub {
+    font-size: 1.25rem; color: rgba(232,236,244,0.5); max-width: 500px;
+    line-height: 1.7; margin-bottom: 3rem;
+  }
+  .hero-version {
+    font-size: 0.8rem; color: rgba(232,236,244,0.3);
+    font-family: var(--font-mono); letter-spacing: 0.05em;
+  }
+
+  /* ══════════════════════════════════════════════
+     LOGO SECTION
+     ══════════════════════════════════════════════ */
+  .logo-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .logo-card {
+    border-radius: 16px; padding: 3rem 2rem;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 240px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .logo-card:hover { border-color: rgba(6,182,212,0.2); }
+  .logo-card.dark-bg { background: var(--navy-900); }
+  .logo-card.light-bg { background: #f8fafc; }
+  .logo-card.cyan-bg { background: linear-gradient(135deg, var(--cyan-600), var(--cyan-500)); }
+  .logo-card.gradient-bg {
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 100%);
+  }
+
+  .logo-card-label {
+    position: absolute; top: 1rem; left: 1.25rem;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; opacity: 0.4;
+  }
+  .light-bg .logo-card-label { color: var(--navy-900); }
+
+  /* SVG Logo Styles */
+  .logo-svg { max-width: 260px; height: auto; }
+  .logo-svg-sm { max-width: 64px; height: auto; }
+  .logo-svg-md { max-width: 180px; height: auto; }
+
+  /* ══════════════════════════════════════════════
+     SYMBOL CONSTRUCTION
+     ══════════════════════════════════════════════ */
+  .construction-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    margin-top: 3rem; align-items: center;
+  }
+  .construction-svg { width: 100%; max-width: 500px; margin: 0 auto; display: block; }
+  .construction-text h3 {
+    font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .construction-text p {
+    color: rgba(232,236,244,0.55); line-height: 1.8; margin-bottom: 1.5rem;
+  }
+  .construction-text ul {
+    list-style: none; padding: 0;
+  }
+  .construction-text li {
+    padding: 0.5rem 0; padding-left: 1.5rem; position: relative;
+    color: rgba(232,236,244,0.65); font-size: 0.95rem;
+  }
+  .construction-text li::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan-500); transform: translateY(-50%);
+  }
+
+  /* ══════════════════════════════════════════════
+     COLORS
+     ══════════════════════════════════════════════ */
+  .color-palette {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem; margin-top: 3rem;
+  }
+  .color-chip {
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.2s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .color-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .color-swatch { height: 100px; position: relative; }
+  .color-swatch.glow::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  }
+  .color-info { padding: 1rem 1.25rem; background: var(--navy-900); }
+  .color-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+  .color-hex { font-family: var(--font-mono); font-size: 0.8rem; color: rgba(232,236,244,0.5); }
+  .color-hsl { font-family: var(--font-mono); font-size: 0.72rem; color: rgba(232,236,244,0.3); display: block; margin-top: 0.15rem; }
+
+  /* Color groups */
+  .color-group { margin-top: 3rem; }
+  .color-group-title {
+    font-size: 1rem; font-weight: 600; margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: rgba(232,236,244,0.8);
+  }
+  .color-strip {
+    display: flex; border-radius: 12px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06); margin-bottom: 1.5rem;
+  }
+  .color-strip-item {
+    flex: 1; height: 80px; position: relative; cursor: default;
+    transition: flex 0.3s;
+  }
+  .color-strip-item:hover { flex: 2; }
+  .color-strip-item span {
+    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; font-family: var(--font-mono); opacity: 0;
+    transition: opacity 0.2s; white-space: nowrap;
+    background: rgba(0,0,0,0.7); padding: 2px 6px; border-radius: 4px;
+  }
+  .color-strip-item:hover span { opacity: 1; }
+
+  /* ══════════════════════════════════════════════
+     TYPOGRAPHY
+     ══════════════════════════════════════════════ */
+  .type-specimen { margin-top: 3rem; }
+  .type-row {
+    padding: 2rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: grid; grid-template-columns: 180px 1fr; gap: 2rem; align-items: baseline;
+  }
+  .type-meta { font-size: 0.75rem; color: rgba(232,236,244,0.4); }
+  .type-meta strong { display: block; color: rgba(232,236,244,0.7); font-size: 0.85rem; margin-bottom: 0.25rem; }
+  .type-meta code { font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan-500); }
+
+  .type-display-1 { font-size: 4rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; }
+  .type-display-2 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
+  .type-h1 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.2; }
+  .type-h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; }
+  .type-h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.4; }
+  .type-body { font-size: 1rem; font-weight: 400; line-height: 1.7; color: rgba(232,236,244,0.7); }
+  .type-small { font-size: 0.875rem; font-weight: 400; line-height: 1.6; color: rgba(232,236,244,0.55); }
+  .type-mono { font-family: var(--font-mono); font-size: 0.9rem; color: var(--cyan-400); letter-spacing: 0.02em; }
+
+  /* ══════════════════════════════════════════════
+     SPACING & GRID
+     ══════════════════════════════════════════════ */
+  .spacing-demo { margin-top: 3rem; }
+  .space-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 0.75rem; }
+  .space-bar {
+    height: 24px; border-radius: 6px;
+    background: linear-gradient(90deg, var(--cyan-600), var(--cyan-400));
+    opacity: 0.6; transition: opacity 0.2s;
+  }
+  .space-bar:hover { opacity: 1; }
+  .space-label {
+    min-width: 120px; font-family: var(--font-mono); font-size: 0.8rem;
+    color: rgba(232,236,244,0.5);
+  }
+  .space-value { font-family: var(--font-mono); font-size: 0.75rem; color: rgba(232,236,244,0.3); }
+
+  /* ══════════════════════════════════════════════
+     ICONOGRAPHY
+     ══════════════════════════════════════════════ */
+  .icon-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem; margin-top: 2rem;
+  }
+  .icon-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+    padding: 1.5rem 1rem; border-radius: 12px;
+    background: var(--navy-900); border: 1px solid rgba(255,255,255,0.04);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .icon-item:hover {
+    border-color: rgba(6,182,212,0.15);
+    background: rgba(6,182,212,0.04);
+  }
+  .icon-item svg { width: 24px; height: 24px; color: var(--cyan-400); }
+  .icon-item span { font-size: 0.7rem; color: rgba(232,236,244,0.4); text-align: center; }
+
+  /* ══════════════════════════════════════════════
+     USAGE RULES (DO / DON'T)
+     ══════════════════════════════════════════════ */
+  .rules-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;
+  }
+  .rule-card {
+    border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.06);
+    background: var(--navy-900);
+  }
+  .rule-card.do { border-top: 3px solid var(--success); }
+  .rule-card.dont { border-top: 3px solid var(--danger); }
+  .rule-badge {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 0.2rem 0.75rem; border-radius: 100px; margin-bottom: 1rem;
+  }
+  .do .rule-badge { background: rgba(34,197,94,0.1); color: var(--success); }
+  .dont .rule-badge { background: rgba(239,68,68,0.1); color: var(--danger); }
+  .rule-card ul { list-style: none; }
+  .rule-card li {
+    padding: 0.4rem 0; padding-left: 1.25rem; position: relative;
+    font-size: 0.9rem; color: rgba(232,236,244,0.65);
+  }
+  .do li::before {
+    content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700;
+  }
+  .dont li::before {
+    content: '✕'; position: absolute; left: 0; color: var(--danger); font-weight: 700;
+  }
+
+  /* ══════════════════════════════════════════════
+     VOICE & TONE
+     ══════════════════════════════════════════════ */
+  .voice-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .voice-card {
+    border-radius: 16px; padding: 2rem;
+    background: var(--navy-900); border: 1px solid rgba(255,255,255,0.06);
+  }
+  .voice-card h4 {
+    font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .voice-card p { font-size: 0.9rem; color: rgba(232,236,244,0.55); line-height: 1.7; }
+  .voice-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 0.75rem;
+  }
+
+  /* ══════════════════════════════════════════════
+     CHANNEL BADGES
+     ══════════════════════════════════════════════ */
+  .channel-row {
+    display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap;
+  }
+  .channel-badge {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.25rem 2rem; border-radius: 12px;
+    background: var(--navy-900); border: 1px solid rgba(255,255,255,0.06);
+    flex: 1; min-width: 280px;
+  }
+  .channel-dot {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .channel-dot.wa { background: rgba(37,211,102,0.12); color: var(--whatsapp); }
+  .channel-dot.ig { background: rgba(225,48,108,0.12); color: var(--instagram); }
+  .channel-name { font-weight: 600; font-size: 0.95rem; }
+  .channel-hex { font-family: var(--font-mono); font-size: 0.8rem; color: rgba(232,236,244,0.4); }
+
+  /* ══════════════════════════════════════════════
+     DARK MODE SURFACES
+     ══════════════════════════════════════════════ */
+  .surface-demo {
+    display: flex; gap: 0; border-radius: 16px; overflow: hidden;
+    margin-top: 2rem; border: 1px solid rgba(255,255,255,0.06);
+  }
+  .surface-level {
+    flex: 1; padding: 2rem 1.5rem; text-align: center; min-height: 120px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem;
+  }
+  .surface-level .label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(232,236,244,0.4); }
+  .surface-level .value { font-family: var(--font-mono); font-size: 0.72rem; color: rgba(232,236,244,0.3); }
+
+  /* ══════════════════════════════════════════════
+     EFFECTS
+     ══════════════════════════════════════════════ */
+  .effects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .effect-card {
+    border-radius: 16px; padding: 2rem; position: relative; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: var(--navy-900);
+  }
+  .effect-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .effect-demo {
+    height: 80px; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 0.8rem; font-family: var(--font-mono);
+    color: rgba(232,236,244,0.5);
+  }
+  .glass-demo {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+  }
+  .glow-demo {
+    background: rgba(6,182,212,0.06);
+    box-shadow: 0 0 20px rgba(6,182,212,0.15), 0 0 60px rgba(6,182,212,0.05);
+    border: 1px solid rgba(6,182,212,0.15);
+  }
+  .gradient-demo {
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-800) 50%, rgba(6,182,212,0.08) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* ══════════════════════════════════════════════
+     RESPONSIVE LOGO SIZES
+     ══════════════════════════════════════════════ */
+  .size-demo {
+    display: flex; align-items: flex-end; gap: 3rem;
+    margin-top: 3rem; flex-wrap: wrap;
+  }
+  .size-item {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  }
+  .size-item .meta {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    color: rgba(232,236,244,0.35); text-align: center;
+  }
+
+  /* ══════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════ */
+  footer {
+    text-align: center; padding: 4rem 0; color: rgba(232,236,244,0.3);
+    font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  footer strong { color: rgba(232,236,244,0.5); }
+
+  /* Animations */
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes pulse-glow {
+    0%,100% { box-shadow: 0 0 12px rgba(6,182,212,0.2); }
+    50% { box-shadow: 0 0 24px rgba(6,182,212,0.4); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-float { animation: float 3s ease-in-out infinite; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.8rem; }
+    .section-title { font-size: 1.8rem; }
+    .construction-grid { grid-template-columns: 1fr; }
+    .rules-grid { grid-template-columns: 1fr; }
+    .type-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    nav .nav-links { display: none; }
+    .logo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Flow<span>Pilot</span></div>
+    <ul class="nav-links">
+      <li><a href="#logo">Logo</a></li>
+      <li><a href="#symbol">Simbolo</a></li>
+      <li><a href="#colors">Cores</a></li>
+      <li><a href="#typography">Tipografia</a></li>
+      <li><a href="#effects">Efeitos</a></li>
+      <li><a href="#voice">Voz</a></li>
+      <li><a href="#rules">Regras</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-badge">BRAND BOOK v1.0</div>
+  <h1>
+    <span class="flow">Flow</span><span class="pilot">Pilot</span>
+  </h1>
+  <p class="hero-sub">Manual completo de identidade visual e diretrizes da marca FlowPilot — plataforma de automação inteligente para WhatsApp & Instagram.</p>
+  <p class="hero-version">Atualizado em Março 2026</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     01. LOGO SYSTEM
+     ═══════════════════════════════════════════════ -->
+<section id="logo">
+  <div class="section-label">01 — Logotipo</div>
+  <h2 class="section-title">Sistema de Logo</h2>
+  <p class="section-desc">O logo FlowPilot combina tipografia bold com o símbolo tecnológico que representa fluxo, automação e direção inteligente.</p>
+
+  <div class="logo-grid">
+    <!-- Primary Logo - Dark BG -->
+    <div class="logo-card dark-bg">
+      <div class="logo-card-label">Primário — Fundo Escuro</div>
+      <svg class="logo-svg" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+        <!-- Symbol -->
+        <g transform="translate(10, 8)">
+          <!-- Outer ring -->
+          <circle cx="32" cy="32" r="28" fill="none" stroke="url(#grad1)" stroke-width="2.5" opacity="0.3"/>
+          <!-- Flow arrows / data streams -->
+          <path d="M16 22 L28 32 L16 42" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M28 16 L40 26 L28 36" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+          <path d="M36 28 L48 38 L36 48" fill="none" stroke="#67e8f9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+          <!-- Center dot — pilot point -->
+          <circle cx="32" cy="32" r="3" fill="#06b6d4">
+            <animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Glow -->
+          <circle cx="32" cy="32" r="6" fill="url(#glowGrad)" opacity="0.4"/>
+        </g>
+        <!-- Wordmark -->
+        <text x="82" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#e8ecf4">Flow</text>
+        <text x="195" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="url(#textGrad)">Pilot</text>
+        <!-- Gradients -->
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#67e8f9"/>
+          </linearGradient>
+          <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#22d3ee"/>
+            <stop offset="100%" stop-color="#06b6d4"/>
+          </linearGradient>
+          <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Primary Logo - Light BG -->
+    <div class="logo-card light-bg">
+      <div class="logo-card-label" style="color:#1e293b">Primário — Fundo Claro</div>
+      <svg class="logo-svg" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(10, 8)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="#0891b2" stroke-width="2.5" opacity="0.2"/>
+          <path d="M16 22 L28 32 L16 42" fill="none" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M28 16 L40 26 L28 36" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M36 28 L48 38 L36 48" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+          <circle cx="32" cy="32" r="3" fill="#0891b2"/>
+        </g>
+        <text x="82" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#0f172a">Flow</text>
+        <text x="195" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#0891b2">Pilot</text>
+      </svg>
+    </div>
+
+    <!-- Monochrome White -->
+    <div class="logo-card gradient-bg">
+      <div class="logo-card-label">Monocromático — Branco</div>
+      <svg class="logo-svg" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(10, 8)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="#fff" stroke-width="2.5" opacity="0.15"/>
+          <path d="M16 22 L28 32 L16 42" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+          <path d="M28 16 L40 26 L28 36" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          <path d="M36 28 L48 38 L36 48" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+          <circle cx="32" cy="32" r="3" fill="#fff"/>
+        </g>
+        <text x="82" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#fff">Flow</text>
+        <text x="195" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#fff" opacity="0.7">Pilot</text>
+      </svg>
+    </div>
+
+    <!-- Icon on Cyan -->
+    <div class="logo-card cyan-bg">
+      <div class="logo-card-label" style="color:rgba(255,255,255,0.7)">Ícone — Sobre Marca</div>
+      <svg class="logo-svg-sm" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="16" fill="rgba(255,255,255,0.15)"/>
+        <g transform="translate(10, 10)">
+          <path d="M8 14 L18 22 L8 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 8 L28 16 L18 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M26 18 L36 26 L26 34" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+          <circle cx="22" cy="22" r="3" fill="#fff"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Responsive Sizes -->
+  <h3 style="margin-top:4rem; font-size:1.2rem; font-weight:600; color:rgba(232,236,244,0.8);">Tamanhos Responsivos</h3>
+  <div class="size-demo">
+    <!-- Favicon 16px -->
+    <div class="size-item">
+      <svg viewBox="0 0 64 64" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="#06b6d4"/>
+        <text x="32" y="42" font-family="Inter, sans-serif" font-weight="900" font-size="32" fill="#fff" text-anchor="middle">FP</text>
+      </svg>
+      <div class="meta">16px<br>Favicon</div>
+    </div>
+    <!-- 32px -->
+    <div class="size-item">
+      <svg viewBox="0 0 64 64" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="#06b6d4"/>
+        <g transform="translate(10, 10)">
+          <path d="M8 14 L18 22 L8 30" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="22" r="3.5" fill="#fff"/>
+        </g>
+      </svg>
+      <div class="meta">32px<br>Tab Icon</div>
+    </div>
+    <!-- 48px -->
+    <div class="size-item">
+      <svg viewBox="0 0 64 64" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="#06b6d4"/>
+        <g transform="translate(10, 10)">
+          <path d="M8 14 L18 22 L8 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 8 L28 16 L18 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <circle cx="22" cy="22" r="3" fill="#fff"/>
+        </g>
+      </svg>
+      <div class="meta">48px<br>App Icon</div>
+    </div>
+    <!-- 64px -->
+    <div class="size-item">
+      <svg viewBox="0 0 64 64" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="url(#iconGrad)"/>
+        <g transform="translate(10, 10)">
+          <path d="M8 14 L18 22 L8 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 8 L28 16 L18 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M26 18 L36 26 L26 34" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+          <circle cx="22" cy="22" r="3" fill="#fff"/>
+        </g>
+        <defs>
+          <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0891b2"/>
+            <stop offset="100%" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="meta">64px<br>Large Icon</div>
+    </div>
+    <!-- 128px -->
+    <div class="size-item">
+      <svg viewBox="0 0 64 64" width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="url(#iconGrad2)"/>
+        <g transform="translate(10, 10)">
+          <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+          <path d="M8 14 L18 22 L8 30" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 8 L28 16 L18 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M26 18 L36 26 L26 34" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+          <circle cx="22" cy="22" r="2.5" fill="#fff"/>
+          <circle cx="22" cy="22" r="5" fill="rgba(255,255,255,0.15)"/>
+        </g>
+        <defs>
+          <linearGradient id="iconGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0e7490"/>
+            <stop offset="50%" stop-color="#0891b2"/>
+            <stop offset="100%" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="meta">128px<br>Splash / Marketing</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     02. SYMBOL CONSTRUCTION
+     ═══════════════════════════════════════════════ -->
+<section id="symbol">
+  <div class="section-label">02 — Construcao do Simbolo</div>
+  <h2 class="section-title">Anatomia do Icone</h2>
+
+  <div class="construction-grid">
+    <div>
+      <svg class="construction-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid -->
+        <defs>
+          <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="400" height="400" fill="url(#grid)"/>
+
+        <!-- Construction circles -->
+        <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(6,182,212,0.1)" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(6,182,212,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(6,182,212,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
+
+        <!-- Center lines -->
+        <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(239,68,68,0.15)" stroke-width="0.5" stroke-dasharray="6 4"/>
+        <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(239,68,68,0.15)" stroke-width="0.5" stroke-dasharray="6 4"/>
+
+        <!-- Outer ring -->
+        <circle cx="200" cy="200" r="140" fill="none" stroke="url(#constGrad)" stroke-width="3" opacity="0.3"/>
+
+        <!-- Flow Arrow 1 (primary) -->
+        <path d="M100 140 L160 200 L100 260" fill="none" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Flow Arrow 2 -->
+        <path d="M160 90 L230 160 L160 230" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        <!-- Flow Arrow 3 -->
+        <path d="M210 150 L280 220 L210 290" fill="none" stroke="#67e8f9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+
+        <!-- Center node -->
+        <circle cx="200" cy="200" r="16" fill="rgba(6,182,212,0.15)" stroke="#06b6d4" stroke-width="2"/>
+        <circle cx="200" cy="200" r="8" fill="#06b6d4"/>
+
+        <!-- Dimension labels -->
+        <text x="200" y="18" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(232,236,244,0.3)" text-anchor="middle">Outer Ring: 140u</text>
+        <text x="388" y="204" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(232,236,244,0.3)" text-anchor="end" transform="rotate(90 388 204)">Center Axis</text>
+
+        <defs>
+          <linearGradient id="constGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#67e8f9"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="construction-text">
+      <h3>Conceito: Fluxo Direcionado</h3>
+      <p>O símbolo FlowPilot é construído a partir de três chevrons sobrepostos em perspectiva, representando dados fluindo através de automacoes inteligentes. O ponto central (Pilot Node) simboliza o controle e a inteligencia por tras de cada fluxo.</p>
+      <ul>
+        <li><strong>Chevron Primario:</strong> Representa o fluxo principal de dados — mensagens e conversas</li>
+        <li><strong>Chevron Secundario:</strong> Automacoes e regras que processam os dados</li>
+        <li><strong>Chevron Terciario:</strong> IA e inteligencia que otimizam os resultados</li>
+        <li><strong>Pilot Node:</strong> O ponto central de controle — o "piloto" que direciona tudo</li>
+        <li><strong>Anel Externo:</strong> O ecossistema completo — WhatsApp, Instagram, CRM</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     03. COLOR SYSTEM
+     ═══════════════════════════════════════════════ -->
+<section id="colors">
+  <div class="section-label">03 — Sistema de Cores</div>
+  <h2 class="section-title">Paleta de Cores</h2>
+  <p class="section-desc">Uma paleta centrada em cyan tecnologico com profundidade navy e acentos semanticos para feedback visual preciso.</p>
+
+  <!-- Primary Cyan Scale -->
+  <div class="color-group">
+    <div class="color-group-title">Cyan — Cor Primaria da Marca</div>
+    <div class="color-strip">
+      <div class="color-strip-item" style="background:#ecfeff"><span style="color:#164e63">#ecfeff</span></div>
+      <div class="color-strip-item" style="background:#cffafe"><span style="color:#164e63">#cffafe</span></div>
+      <div class="color-strip-item" style="background:#a5f3fc"><span style="color:#164e63">#a5f3fc</span></div>
+      <div class="color-strip-item" style="background:#67e8f9"><span style="color:#164e63">#67e8f9</span></div>
+      <div class="color-strip-item" style="background:#22d3ee"><span style="color:#0a1120">#22d3ee</span></div>
+      <div class="color-strip-item" style="background:#06b6d4"><span>#06b6d4</span></div>
+      <div class="color-strip-item" style="background:#0891b2"><span>#0891b2</span></div>
+      <div class="color-strip-item" style="background:#0e7490"><span>#0e7490</span></div>
+      <div class="color-strip-item" style="background:#155e75"><span>#155e75</span></div>
+      <div class="color-strip-item" style="background:#164e63"><span>#164e63</span></div>
+      <div class="color-strip-item" style="background:#083344"><span>#083344</span></div>
+    </div>
+  </div>
+
+  <!-- Navy Scale -->
+  <div class="color-group">
+    <div class="color-group-title">Navy — Superficies & Fundos</div>
+    <div class="color-strip">
+      <div class="color-strip-item" style="background:#070d18"><span>#070d18</span></div>
+      <div class="color-strip-item" style="background:#0a1120"><span>#0a1120</span></div>
+      <div class="color-strip-item" style="background:#0c1528"><span>#0c1528</span></div>
+      <div class="color-strip-item" style="background:#0f1a33"><span>#0f1a33</span></div>
+      <div class="color-strip-item" style="background:#142345"><span>#142345</span></div>
+      <div class="color-strip-item" style="background:#1e3566"><span>#1e3566</span></div>
+      <div class="color-strip-item" style="background:#2d4a8a"><span>#2d4a8a</span></div>
+    </div>
+  </div>
+
+  <!-- Main Palette Cards -->
+  <div class="color-palette">
+    <div class="color-chip">
+      <div class="color-swatch glow" style="background: linear-gradient(135deg, #22d3ee, #06b6d4);"></div>
+      <div class="color-info">
+        <div class="color-name">Cyan 500 — Primary</div>
+        <div class="color-hex">#06B6D4</div>
+        <span class="color-hsl">hsl(187, 94%, 43%)</span>
+      </div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#0a1120"></div>
+      <div class="color-info">
+        <div class="color-name">Navy 900 — Background</div>
+        <div class="color-hex">#0A1120</div>
+        <span class="color-hsl">hsl(224, 50%, 8%)</span>
+      </div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#0f1a33"></div>
+      <div class="color-info">
+        <div class="color-name">Navy 800 — Card</div>
+        <div class="color-hex">#0F1A33</div>
+        <span class="color-hsl">hsl(222, 47%, 10%)</span>
+      </div>
+    </div>
+    <div class="color-chip">
+      <div class="color-swatch" style="background:#e8ecf4"></div>
+      <div class="color-info">
+        <div class="color-name">Foreground</div>
+        <div class="color-hex">#E8ECF4</div>
+        <span class="color-hsl">hsl(213, 27%, 97%)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Semantic Colors -->
+  <div class="color-group">
+    <div class="color-group-title">Cores Semanticas</div>
+    <div class="color-palette">
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#22c55e"></div>
+        <div class="color-info">
+          <div class="color-name">Success</div>
+          <div class="color-hex">#22C55E</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#f59e0b"></div>
+        <div class="color-info">
+          <div class="color-name">Warning</div>
+          <div class="color-hex">#F59E0B</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#ef4444"></div>
+        <div class="color-info">
+          <div class="color-name">Danger</div>
+          <div class="color-hex">#EF4444</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="color-swatch" style="background:#3b82f6"></div>
+        <div class="color-info">
+          <div class="color-name">Info</div>
+          <div class="color-hex">#3B82F6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Channel Colors -->
+  <div class="color-group">
+    <div class="color-group-title">Cores de Canal</div>
+    <div class="channel-row">
+      <div class="channel-badge">
+        <div class="channel-dot wa">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div>
+          <div class="channel-name">WhatsApp</div>
+          <div class="channel-hex">#25D366</div>
+        </div>
+      </div>
+      <div class="channel-badge">
+        <div class="channel-dot ig">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div>
+          <div class="channel-name">Instagram</div>
+          <div class="channel-hex">#E1306C</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Surface Depth -->
+  <div class="color-group">
+    <div class="color-group-title">Hierarquia de Superficie (Dark Mode)</div>
+    <div class="surface-demo">
+      <div class="surface-level" style="background:hsl(224, 52%, 7%)">
+        <div class="label">Surface 0</div>
+        <div class="value">hsl(224, 52%, 7%)</div>
+      </div>
+      <div class="surface-level" style="background:hsl(223, 48%, 9%)">
+        <div class="label">Surface 1</div>
+        <div class="value">hsl(223, 48%, 9%)</div>
+      </div>
+      <div class="surface-level" style="background:hsl(222, 44%, 12%)">
+        <div class="label">Surface 2</div>
+        <div class="value">hsl(222, 44%, 12%)</div>
+      </div>
+      <div class="surface-level" style="background:hsl(221, 38%, 15%)">
+        <div class="label">Surface 3</div>
+        <div class="value">hsl(221, 38%, 15%)</div>
+      </div>
+      <div class="surface-level" style="background:hsl(220, 34%, 19%)">
+        <div class="label">Surface 4</div>
+        <div class="value">hsl(220, 34%, 19%)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     04. TYPOGRAPHY
+     ═══════════════════════════════════════════════ -->
+<section id="typography">
+  <div class="section-label">04 — Tipografia</div>
+  <h2 class="section-title">Escala Tipografica</h2>
+  <p class="section-desc">Inter para interfaces, Geist Sans como alternativa, e JetBrains Mono para codigo e dados tecnicos.</p>
+
+  <div class="type-specimen">
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Display 1</strong>
+        4rem / 900<br>
+        <code>letter-spacing: -0.04em</code>
+      </div>
+      <div class="type-display-1">Automatize tudo.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Display 2</strong>
+        3rem / 800<br>
+        <code>letter-spacing: -0.03em</code>
+      </div>
+      <div class="type-display-2">Conversas que convertem.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Heading 1</strong>
+        2.25rem / 700<br>
+        <code>letter-spacing: -0.025em</code>
+      </div>
+      <div class="type-h1">Dashboard de Leads</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Heading 2</strong>
+        1.75rem / 700<br>
+        <code>letter-spacing: -0.02em</code>
+      </div>
+      <div class="type-h2">Configuracoes do WhatsApp</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Heading 3</strong>
+        1.25rem / 600<br>
+        <code>letter-spacing: -0.01em</code>
+      </div>
+      <div class="type-h3">Automacoes Ativas</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Body</strong>
+        1rem / 400<br>
+        <code>line-height: 1.7</code>
+      </div>
+      <div class="type-body">Gerencie todas as suas conversas de WhatsApp e Instagram em um unico painel. Crie automacoes inteligentes que respondem, qualificam e convertem leads automaticamente.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Small</strong>
+        0.875rem / 400<br>
+        <code>line-height: 1.6</code>
+      </div>
+      <div class="type-small">Ultima atualizacao ha 5 minutos • 24 leads ativos • 3 automacoes rodando</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">
+        <strong>Mono</strong>
+        0.9rem / 400<br>
+        <code>JetBrains Mono</code>
+      </div>
+      <div class="type-mono">const flow = await pilot.createAutomation({ trigger: 'message' })</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     05. EFFECTS & MATERIALS
+     ═══════════════════════════════════════════════ -->
+<section id="effects">
+  <div class="section-label">05 — Efeitos & Materiais</div>
+  <h2 class="section-title">Linguagem Visual</h2>
+  <p class="section-desc">O FlowPilot usa glassmorphism, glows sutis e gradientes profundos para criar uma experiencia futurista porem acessivel.</p>
+
+  <div class="effects-grid">
+    <div class="effect-card">
+      <h4>Glass Effect</h4>
+      <p style="font-size:0.85rem;color:rgba(232,236,244,0.45);margin-bottom:1rem;">Cartoes e overlays com transparencia e blur</p>
+      <div class="effect-demo glass-demo">backdrop-filter: blur(16px)</div>
+    </div>
+    <div class="effect-card">
+      <h4>Cyan Glow</h4>
+      <p style="font-size:0.85rem;color:rgba(232,236,244,0.45);margin-bottom:1rem;">Elementos interativos e destaques de marca</p>
+      <div class="effect-demo glow-demo">box-shadow: 0 0 20px cyan/0.15</div>
+    </div>
+    <div class="effect-card">
+      <h4>Surface Gradient</h4>
+      <p style="font-size:0.85rem;color:rgba(232,236,244,0.45);margin-bottom:1rem;">Fundos de secao e cards principais</p>
+      <div class="effect-demo gradient-demo">linear-gradient(135deg, ...)</div>
+    </div>
+  </div>
+
+  <!-- Border Radius -->
+  <div class="color-group">
+    <div class="color-group-title">Border Radius</div>
+    <div style="display:flex;gap:2rem;align-items:flex-end;flex-wrap:wrap;margin-top:1.5rem;">
+      <div style="text-align:center;">
+        <div style="width:60px;height:60px;border-radius:8px;background:var(--navy-800);border:1px solid rgba(6,182,212,0.2);margin:0 auto 0.5rem;"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:rgba(232,236,244,0.4);">sm: 8px</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:60px;height:60px;border-radius:10px;background:var(--navy-800);border:1px solid rgba(6,182,212,0.2);margin:0 auto 0.5rem;"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:rgba(232,236,244,0.4);">md: 10px</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:60px;height:60px;border-radius:12px;background:var(--navy-800);border:1px solid rgba(6,182,212,0.2);margin:0 auto 0.5rem;"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:rgba(232,236,244,0.4);">lg: 12px</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:60px;height:60px;border-radius:16px;background:var(--navy-800);border:1px solid rgba(6,182,212,0.2);margin:0 auto 0.5rem;"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:rgba(232,236,244,0.4);">xl: 16px</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:60px;height:60px;border-radius:24px;background:var(--navy-800);border:1px solid rgba(6,182,212,0.2);margin:0 auto 0.5rem;"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:rgba(232,236,244,0.4);">2xl: 24px</span>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:60px;height:60px;border-radius:100px;background:var(--navy-800);border:1px solid rgba(6,182,212,0.2);margin:0 auto 0.5rem;"></div>
+        <span style="font-family:var(--font-mono);font-size:0.72rem;color:rgba(232,236,244,0.4);">full: 100px</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambient Orbs -->
+  <div class="color-group">
+    <div class="color-group-title">Ambient Orbs — Decoracoes de Fundo</div>
+    <div style="position:relative;height:200px;border-radius:16px;overflow:hidden;background:var(--navy-950);border:1px solid rgba(255,255,255,0.04);margin-top:1rem;">
+      <div style="position:absolute;top:-100px;left:10%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,0.07) 0%,transparent 70%);"></div>
+      <div style="position:absolute;bottom:-150px;right:10%;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.07) 0%,transparent 70%);"></div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.8rem;color:rgba(232,236,244,0.3);">
+        .ambient-orb-cyan + .ambient-orb-purple
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     06. SPACING SYSTEM
+     ═══════════════════════════════════════════════ -->
+<section id="spacing">
+  <div class="section-label">06 — Espacamento</div>
+  <h2 class="section-title">Grid & Espacamento</h2>
+  <p class="section-desc">Sistema baseado em incrementos de 4px, compativel com Tailwind CSS.</p>
+
+  <div class="spacing-demo">
+    <div class="space-row">
+      <div class="space-label">4px <span style="color:rgba(232,236,244,0.3)">— 0.25rem</span></div>
+      <div class="space-bar" style="width:16px"></div>
+      <div class="space-value">space-1</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">8px <span style="color:rgba(232,236,244,0.3)">— 0.5rem</span></div>
+      <div class="space-bar" style="width:32px"></div>
+      <div class="space-value">space-2</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">12px <span style="color:rgba(232,236,244,0.3)">— 0.75rem</span></div>
+      <div class="space-bar" style="width:48px"></div>
+      <div class="space-value">space-3</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">16px <span style="color:rgba(232,236,244,0.3)">— 1rem</span></div>
+      <div class="space-bar" style="width:64px"></div>
+      <div class="space-value">space-4</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">24px <span style="color:rgba(232,236,244,0.3)">— 1.5rem</span></div>
+      <div class="space-bar" style="width:96px"></div>
+      <div class="space-value">space-6</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">32px <span style="color:rgba(232,236,244,0.3)">— 2rem</span></div>
+      <div class="space-bar" style="width:128px"></div>
+      <div class="space-value">space-8</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">48px <span style="color:rgba(232,236,244,0.3)">— 3rem</span></div>
+      <div class="space-bar" style="width:192px"></div>
+      <div class="space-value">space-12</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">64px <span style="color:rgba(232,236,244,0.3)">— 4rem</span></div>
+      <div class="space-bar" style="width:256px"></div>
+      <div class="space-value">space-16</div>
+    </div>
+    <div class="space-row">
+      <div class="space-label">96px <span style="color:rgba(232,236,244,0.3)">— 6rem</span></div>
+      <div class="space-bar" style="width:384px"></div>
+      <div class="space-value">space-24</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     07. VOICE & TONE
+     ═══════════════════════════════════════════════ -->
+<section id="voice">
+  <div class="section-label">07 — Voz & Tom</div>
+  <h2 class="section-title">Personalidade da Marca</h2>
+  <p class="section-desc">O FlowPilot fala com a confianca de quem entende de tecnologia, mas com a simplicidade de quem quer ajudar.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="voice-icon" style="background:rgba(6,182,212,0.1);color:var(--cyan-400);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h4>Direto</h4>
+      <p>Sem enrolacao. Cada palavra existe por um motivo. Comunicamos valor, nao complexidade.</p>
+    </div>
+    <div class="voice-card">
+      <div class="voice-icon" style="background:rgba(34,197,94,0.1);color:var(--success);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h4>Confiavel</h4>
+      <p>Construimos confianca com resultados. Dados reais, metricas claras, sem promessas vazias.</p>
+    </div>
+    <div class="voice-card">
+      <div class="voice-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <h4>Acessivel</h4>
+      <p>Tech nao precisa ser intimidador. Falamos a lingua do empreendedor digital brasileiro.</p>
+    </div>
+    <div class="voice-card">
+      <div class="voice-icon" style="background:rgba(245,158,11,0.1);color:var(--warning);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <h4>Inovador</h4>
+      <p>Estamos na fronteira da automacao com IA. Nosso tom reflete tecnologia de ponta, nao hype.</p>
+    </div>
+  </div>
+
+  <!-- Exemplos de copy -->
+  <div class="color-group">
+    <div class="color-group-title">Exemplos de Copy</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem;">
+      <div style="padding:1.5rem;border-radius:12px;background:var(--navy-900);border:1px solid rgba(255,255,255,0.06);">
+        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--success);margin-bottom:0.75rem;">Como escrevemos</div>
+        <p style="font-size:0.9rem;color:rgba(232,236,244,0.7);line-height:1.7;">"Seus leads respondidos em segundos, nao horas. Automacao que converte enquanto voce dorme."</p>
+      </div>
+      <div style="padding:1.5rem;border-radius:12px;background:var(--navy-900);border:1px solid rgba(255,255,255,0.06);">
+        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--danger);margin-bottom:0.75rem;">Como NAO escrevemos</div>
+        <p style="font-size:0.9rem;color:rgba(232,236,244,0.7);line-height:1.7;">"Nossa solucao disruptiva de automacao omnichannel com inteligencia artificial de ponta revoluciona o paradigma..."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     08. USAGE RULES
+     ═══════════════════════════════════════════════ -->
+<section id="rules">
+  <div class="section-label">08 — Regras de Uso</div>
+  <h2 class="section-title">Faca e Nao Faca</h2>
+  <p class="section-desc">Diretrizes para manter a consistencia e integridade da marca em todos os pontos de contato.</p>
+
+  <div class="rules-grid">
+    <div class="rule-card do">
+      <div class="rule-badge">Correto</div>
+      <ul>
+        <li>Use "FlowPilot" como uma palavra (sem espaco)</li>
+        <li>Mantenha o simbolo proporcional ao wordmark</li>
+        <li>Use sobre fundos escuros preferencialmente</li>
+        <li>Respeite a area de protecao minima (1x altura do logo)</li>
+        <li>Use a versao monocromatica em fundos fotograficos</li>
+        <li>Mantenha contraste minimo WCAG AA (4.5:1)</li>
+        <li>Use cyan como cor de destaque, nao como cor predominante</li>
+      </ul>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-badge">Incorreto</div>
+      <ul>
+        <li>Nao separe: "Flow Pilot" ou "flow-pilot"</li>
+        <li>Nao rotacione ou distorca o logo</li>
+        <li>Nao altere as cores do gradiente do simbolo</li>
+        <li>Nao coloque sobre fundos que reduzam legibilidade</li>
+        <li>Nao adicione sombras, bordas ou efeitos ao logo</li>
+        <li>Nao reduza abaixo de 16px de altura para o simbolo</li>
+        <li>Nao use o simbolo separado em contextos formais</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Clear space -->
+  <div class="color-group">
+    <div class="color-group-title">Area de Protecao</div>
+    <div style="display:flex;align-items:center;justify-content:center;padding:4rem 2rem;background:var(--navy-900);border-radius:16px;border:1px solid rgba(255,255,255,0.06);margin-top:1rem;position:relative;">
+      <!-- Clear space guides -->
+      <div style="position:absolute;border:1px dashed rgba(6,182,212,0.3);inset:2rem;border-radius:4px;"></div>
+      <div style="position:absolute;top:1.25rem;left:50%;transform:translateX(-50);font-family:var(--font-mono);font-size:0.65rem;color:rgba(6,182,212,0.4);">1x</div>
+      <svg width="300" viewBox="0 0 400 80" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(10, 8)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="url(#grad1)" stroke-width="2.5" opacity="0.3"/>
+          <path d="M16 22 L28 32 L16 42" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M28 16 L40 26 L28 36" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+          <path d="M36 28 L48 38 L36 48" fill="none" stroke="#67e8f9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+          <circle cx="32" cy="32" r="3" fill="#06b6d4"/>
+        </g>
+        <text x="82" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#e8ecf4">Flow</text>
+        <text x="195" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="url(#textGrad)">Pilot</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Minimum sizes -->
+  <div class="color-group">
+    <div class="color-group-title">Tamanhos Minimos</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:1rem;">
+      <div style="padding:1.5rem;text-align:center;background:var(--navy-900);border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
+        <div style="font-size:0.8rem;font-weight:600;margin-bottom:1rem;">Digital</div>
+        <div style="font-family:var(--font-mono);font-size:2rem;color:var(--cyan-400);margin-bottom:0.5rem;">120px</div>
+        <div style="font-size:0.75rem;color:rgba(232,236,244,0.4);">Largura minima — Logo completo</div>
+      </div>
+      <div style="padding:1.5rem;text-align:center;background:var(--navy-900);border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
+        <div style="font-size:0.8rem;font-weight:600;margin-bottom:1rem;">Icone</div>
+        <div style="font-family:var(--font-mono);font-size:2rem;color:var(--cyan-400);margin-bottom:0.5rem;">16px</div>
+        <div style="font-size:0.75rem;color:rgba(232,236,244,0.4);">Tamanho minimo — Favicon / badge</div>
+      </div>
+      <div style="padding:1.5rem;text-align:center;background:var(--navy-900);border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
+        <div style="font-size:0.8rem;font-weight:600;margin-bottom:1rem;">Impresso</div>
+        <div style="font-family:var(--font-mono);font-size:2rem;color:var(--cyan-400);margin-bottom:0.5rem;">25mm</div>
+        <div style="font-size:0.75rem;color:rgba(232,236,244,0.4);">Largura minima — Material impresso</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     09. APPLICATION EXAMPLES
+     ═══════════════════════════════════════════════ -->
+<section id="applications">
+  <div class="section-label">09 — Aplicacoes</div>
+  <h2 class="section-title">Exemplos de Uso</h2>
+  <p class="section-desc">Como a marca aparece nos diferentes pontos de contato e materiais.</p>
+
+  <div class="logo-grid" style="margin-top:3rem;">
+    <!-- App Bar Mockup -->
+    <div class="logo-card dark-bg" style="padding:0;flex-direction:column;align-items:stretch;">
+      <div class="logo-card-label">App — Sidebar Header</div>
+      <div style="padding:1.25rem 1.5rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06);margin-top:2rem;">
+        <svg viewBox="0 0 64 64" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+          <rect width="64" height="64" rx="14" fill="rgba(6,182,212,0.12)"/>
+          <g transform="translate(10, 10)">
+            <path d="M8 14 L18 22 L8 30" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 8 L28 16 L18 24" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+            <circle cx="22" cy="22" r="3" fill="#06b6d4"/>
+          </g>
+        </svg>
+        <div>
+          <div style="font-weight:700;font-size:0.95rem;">Flow<span style="color:#06b6d4">Pilot</span></div>
+          <div style="font-size:0.7rem;color:rgba(232,236,244,0.35);">Workspace de Gabriel</div>
+        </div>
+      </div>
+      <div style="padding:0.75rem 1.5rem;">
+        <div style="padding:0.6rem 0.75rem;border-radius:8px;background:rgba(6,182,212,0.08);display:flex;align-items:center;gap:0.6rem;border-left:2px solid #06b6d4;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span style="font-size:0.85rem;color:#06b6d4;font-weight:500;">Dashboard</span>
+        </div>
+        <div style="padding:0.6rem 0.75rem;display:flex;align-items:center;gap:0.6rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(232,236,244,0.35)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <span style="font-size:0.85rem;color:rgba(232,236,244,0.5);font-weight:400;">Leads</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media Mockup -->
+    <div class="logo-card" style="background:linear-gradient(135deg, #0c1528 0%, #142345 50%, rgba(6,182,212,0.05) 100%);padding:2.5rem;">
+      <div class="logo-card-label">Social Media — Post</div>
+      <div style="text-align:center;margin-top:1rem;">
+        <svg viewBox="0 0 64 64" width="48" height="48" style="margin-bottom:1.5rem;" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <path d="M8 14 L18 22 L8 30" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 8 L28 16 L18 24" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+            <path d="M26 18 L36 26 L26 34" fill="none" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+            <circle cx="22" cy="22" r="3" fill="#06b6d4"/>
+          </g>
+        </svg>
+        <div style="font-size:1.5rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.5rem;">Automatize seu<br><span style="color:#06b6d4">WhatsApp</span></div>
+        <div style="font-size:0.8rem;color:rgba(232,236,244,0.4);margin-bottom:1.5rem;">Respostas instantaneas. Leads qualificados.</div>
+        <div style="display:inline-block;padding:0.5rem 1.5rem;border-radius:100px;background:linear-gradient(135deg,#0891b2,#06b6d4);font-size:0.8rem;font-weight:600;color:#fff;">Comece Gratis</div>
+      </div>
+    </div>
+
+    <!-- Email Signature -->
+    <div class="logo-card light-bg" style="align-items:flex-start;padding:2rem 2.5rem;">
+      <div class="logo-card-label" style="color:#1e293b;">Email — Assinatura</div>
+      <div style="margin-top:2rem;border-top:2px solid #06b6d4;padding-top:1rem;">
+        <div style="font-weight:700;color:#0f172a;font-size:0.9rem;">Gabriel Rubim</div>
+        <div style="font-size:0.8rem;color:#64748b;">Fundador & CEO</div>
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.75rem;">
+          <svg viewBox="0 0 400 80" width="100" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(10, 8)">
+              <path d="M16 22 L28 32 L16 42" fill="none" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M28 16 L40 26 L28 36" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+              <circle cx="32" cy="32" r="3" fill="#0891b2"/>
+            </g>
+            <text x="82" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#0f172a">Flow</text>
+            <text x="195" y="52" font-family="Inter, sans-serif" font-weight="800" font-size="38" letter-spacing="-1.5" fill="#0891b2">Pilot</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div class="logo-card dark-bg" style="justify-content:center;">
+      <div class="logo-card-label">App — Loading State</div>
+      <div style="text-align:center;" class="animate-float">
+        <svg viewBox="0 0 64 64" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(10, 10)">
+            <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(6,182,212,0.15)" stroke-width="2">
+              <animate attributeName="r" values="18;20;18" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <path d="M8 14 L18 22 L8 30" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+            </path>
+            <path d="M18 8 L28 16 L18 24" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+              <animate attributeName="opacity" values="0.6;0.3;0.6" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+            </path>
+            <path d="M26 18 L36 26 L26 34" fill="none" stroke="#67e8f9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
+              <animate attributeName="opacity" values="0.3;0.1;0.3" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+            </path>
+            <circle cx="22" cy="22" r="3" fill="#06b6d4">
+              <animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+        </svg>
+        <div style="margin-top:1rem;font-size:0.8rem;color:rgba(232,236,244,0.35);font-family:var(--font-mono);">Carregando...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     10. ASSETS DOWNLOAD
+     ═══════════════════════════════════════════════ -->
+<section id="assets">
+  <div class="section-label">10 — Assets</div>
+  <h2 class="section-title">Tokens & Variaveis</h2>
+  <p class="section-desc">Referencia rapida dos tokens de design usados no codigo.</p>
+
+  <div style="margin-top:2rem;background:var(--navy-900);border-radius:16px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
+    <div style="padding:1rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:0.75rem;">
+      <div style="width:12px;height:12px;border-radius:50%;background:#ef4444;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#f59e0b;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#22c55e;"></div>
+      <span style="font-family:var(--font-mono);font-size:0.75rem;color:rgba(232,236,244,0.35);margin-left:0.5rem;">globals.css — CSS Variables</span>
+    </div>
+    <pre style="padding:1.5rem;font-family:var(--font-mono);font-size:0.8rem;line-height:1.8;color:rgba(232,236,244,0.6);overflow-x:auto;"><span style="color:var(--cyan-400);">/* Primary Brand */</span>
+--primary: <span style="color:#67e8f9;">187 94% 43%</span>;              <span style="color:rgba(232,236,244,0.3);">/* #06B6D4 */</span>
+--primary-foreground: <span style="color:#67e8f9;">220 60% 10%</span>;
+
+<span style="color:var(--cyan-400);">/* Dark Surfaces */</span>
+--background: <span style="color:#67e8f9;">224 50% 8%</span>;              <span style="color:rgba(232,236,244,0.3);">/* Deep Navy */</span>
+--card: <span style="color:#67e8f9;">222 47% 10%</span>;
+--surface-0: <span style="color:#67e8f9;">224 52% 7%</span>;
+--surface-1: <span style="color:#67e8f9;">223 48% 9%</span>;
+--surface-2: <span style="color:#67e8f9;">222 44% 12%</span>;
+--surface-3: <span style="color:#67e8f9;">221 38% 15%</span>;
+--surface-4: <span style="color:#67e8f9;">220 34% 19%</span>;
+
+<span style="color:var(--cyan-400);">/* Semantic */</span>
+--success: <span style="color:#22c55e;">142 71% 45%</span>;
+--warning: <span style="color:#f59e0b;">38 92% 50%</span>;
+--danger: <span style="color:#ef4444;">0 84% 60%</span>;
+--info: <span style="color:#3b82f6;">217 91% 60%</span>;
+
+<span style="color:var(--cyan-400);">/* Channels */</span>
+--whatsapp: <span style="color:#25d366;">#25D366</span>;
+--instagram: <span style="color:#e1306c;">#E1306C</span>;
+
+<span style="color:var(--cyan-400);">/* Glass */</span>
+--glass-bg: <span style="color:#67e8f9;">0 0% 100% / 0.04</span>;
+--glass-border: <span style="color:#67e8f9;">0 0% 100% / 0.08</span>;
+--glass-blur: <span style="color:#67e8f9;">16px</span>;
+
+<span style="color:var(--cyan-400);">/* Typography */</span>
+--font-sans: <span style="color:#67e8f9;">'Inter', sans-serif</span>;
+--font-mono: <span style="color:#67e8f9;">'JetBrains Mono', monospace</span>;
+
+<span style="color:var(--cyan-400);">/* Radius */</span>
+--radius: <span style="color:#67e8f9;">0.75rem</span>;                    <span style="color:rgba(232,236,244,0.3);">/* 12px base */</span></pre>
+  </div>
+</section>
+
+</div><!-- .page -->
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════ -->
+<footer>
+  <div class="page">
+    <p><strong>FlowPilot</strong> Brand Book v1.0 — Marco 2026</p>
+    <p style="margin-top:0.5rem;">Documento confidencial. Uso interno e parceiros autorizados.</p>
+  </div>
+</footer>
+
+</body>
+</html>

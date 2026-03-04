@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowPilot — Brand Book Oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ══════════════════════════════════════════════
+     RESET & TOKENS
+     ══════════════════════════════════════════════ */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    /* Primary */
+    --cyan-50:#ecfeff;--cyan-100:#cffafe;--cyan-200:#a5f3fc;--cyan-300:#67e8f9;
+    --cyan-400:#22d3ee;--cyan-500:#06b6d4;--cyan-600:#0891b2;--cyan-700:#0e7490;
+    --cyan-800:#155e75;--cyan-900:#164e63;--cyan-950:#083344;
+    /* Accent */
+    --purple-300:#c4b5fd;--purple-400:#a78bfa;--purple-500:#8b5cf6;--purple-600:#7c3aed;
+    /* Surfaces */
+    --navy-950:#050a14;--navy-900:#0a1225;--navy-850:#0d1730;--navy-800:#111d3a;
+    --navy-700:#162950;--navy-600:#1e3566;
+    /* Text */
+    --fg:#e8ecf4;--fg-dim:rgba(232,236,244,.55);--fg-muted:rgba(232,236,244,.3);--fg-ghost:rgba(232,236,244,.15);
+    /* Glows */
+    --glow-cyan:rgba(6,182,212,.35);--glow-purple:rgba(139,92,246,.25);
+    /* Semantic */
+    --success:#22c55e;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;
+    /* Channels */
+    --whatsapp:#25D366;--instagram:#E1306C;
+    /* Fonts */
+    --font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',monospace;
+    /* Radius */
+    --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:9999px;
+  }
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:var(--font);background:var(--navy-950);color:var(--fg);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  ::selection{background:rgba(6,182,212,.25);color:#fff}
+  ::-webkit-scrollbar{width:5px}
+  ::-webkit-scrollbar-track{background:transparent}
+  ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.06);border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.12)}
+
+  /* ══════════════════════════════════════════════
+     NAVIGATION
+     ══════════════════════════════════════════════ */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,10,20,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(6,182,212,.08);padding:0 2rem}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+  .nav-logo{font-weight:800;font-size:1rem;letter-spacing:-.02em}
+  .nav-logo span{background:linear-gradient(135deg,var(--cyan-300),var(--cyan-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px var(--glow-cyan))}
+  .nav-links{display:flex;gap:1.75rem;list-style:none}
+  .nav-links a{color:var(--fg-muted);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.03em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--cyan-400)}
+
+  /* ══════════════════════════════════════════════
+     LAYOUT
+     ══════════════════════════════════════════════ */
+  .page{max-width:1200px;margin:0 auto;padding:0 2rem}
+  section{padding:6rem 0;border-bottom:1px solid rgba(6,182,212,.04)}
+  section:last-of-type{border-bottom:none}
+  .section-num{font-family:var(--mono);font-size:.7rem;color:var(--cyan-500);opacity:.6;margin-bottom:.25rem}
+  .section-label{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan-500);margin-bottom:.5rem;text-shadow:0 0 12px var(--glow-cyan)}
+  .section-title{font-size:2.5rem;font-weight:800;letter-spacing:-.035em;line-height:1.12;background:linear-gradient(135deg,#fff 40%,var(--cyan-300));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .section-desc{font-size:1.05rem;color:var(--fg-dim);max-width:620px;margin-top:.75rem;line-height:1.8}
+  .subsection{margin-top:3.5rem}
+  .sub-title{font-size:1rem;font-weight:600;color:rgba(232,236,244,.7);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.04)}
+
+  /* ══════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════ */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:60px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.1) 0%,rgba(139,92,246,.04) 40%,transparent 70%);top:-250px;left:50%;transform:translateX(-50%);animation:heroBreath 5s ease-in-out infinite}
+  .hero::after{content:'';position:absolute;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.07) 0%,transparent 70%);bottom:-120px;right:-80px;animation:heroBreath 6s ease-in-out infinite 1.5s}
+  @keyframes heroBreath{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.06)}}
+  @keyframes neonPulse{0%,100%{filter:drop-shadow(0 0 6px var(--glow-cyan))}50%{filter:drop-shadow(0 0 18px var(--glow-cyan)) drop-shadow(0 0 40px rgba(6,182,212,.12))}}
+
+  .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1.1rem;border-radius:var(--r-full);background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.15);font-size:.72rem;font-weight:600;color:var(--cyan-400);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2.5rem;box-shadow:0 0 24px rgba(6,182,212,.08)}
+  .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan-400);box-shadow:0 0 10px var(--cyan-400);animation:neonPulse 2s infinite}
+  .hero h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:900;letter-spacing:-.045em;line-height:1.05;margin-bottom:1.5rem}
+  .hero h1 .flow{color:#fff}
+  .hero h1 .pilot{background:linear-gradient(135deg,var(--cyan-300),var(--cyan-500),var(--purple-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px var(--glow-cyan))}
+  .hero-sub{font-size:1.2rem;color:var(--fg-dim);max-width:500px;line-height:1.75;margin-bottom:3rem}
+  .hero-version{font-size:.78rem;color:var(--fg-ghost);font-family:var(--mono);letter-spacing:.05em}
+
+  /* ══════════════════════════════════════════════
+     LOGO CARDS
+     ══════════════════════════════════════════════ */
+  .logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3rem}
+  .logo-card{border-radius:var(--r-xl);padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:230px;position:relative;overflow:hidden;transition:box-shadow .4s,border-color .3s}
+  .logo-card.dark{background:var(--navy-900);border:1px solid rgba(6,182,212,.06)}
+  .logo-card.dark:hover{box-shadow:0 0 50px rgba(6,182,212,.06);border-color:rgba(6,182,212,.12)}
+  .logo-card.light{background:#f8fafc;border:1px solid rgba(0,0,0,.06)}
+  .logo-card.light:hover{box-shadow:0 12px 40px rgba(0,0,0,.08)}
+  .logo-card.accent{background:linear-gradient(135deg,#0e7490,#06b6d4);border:none;box-shadow:0 0 60px rgba(6,182,212,.15)}
+  .logo-card.gradient{background:linear-gradient(135deg,var(--navy-950) 0%,var(--navy-800) 100%);border:1px solid rgba(6,182,212,.06)}
+  .logo-card.purple{background:linear-gradient(135deg,var(--navy-900),rgba(139,92,246,.06));border:1px solid rgba(139,92,246,.08)}
+  .card-label{position:absolute;top:.85rem;left:1.15rem;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.35}
+  .light .card-label{color:#0f172a}
+
+  /* ══════════════════════════════════════════════
+     CONSTRUCTION
+     ══════════════════════════════════════════════ */
+  .construct-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;margin-top:3rem;align-items:center}
+  .construct-text h3{font-size:1.35rem;font-weight:700;margin-bottom:.75rem;letter-spacing:-.02em}
+  .construct-text p{color:var(--fg-dim);line-height:1.8;margin-bottom:1.25rem}
+  .construct-text ul{list-style:none}
+  .construct-text li{padding:.4rem 0 .4rem 1.35rem;position:relative;color:rgba(232,236,244,.6);font-size:.92rem}
+  .construct-text li::before{content:'';position:absolute;left:0;top:50%;width:6px;height:6px;border-radius:50%;transform:translateY(-50%);box-shadow:0 0 8px var(--glow-cyan)}
+  .construct-text li:nth-child(1)::before{background:var(--cyan-500)}
+  .construct-text li:nth-child(2)::before{background:var(--cyan-300)}
+  .construct-text li:nth-child(3)::before{background:var(--purple-500)}
+  .construct-text li:nth-child(4)::before{background:var(--cyan-400)}
+  .construct-text li:nth-child(5)::before{background:var(--cyan-500);opacity:.5}
+  .construct-text li:nth-child(6)::before{background:var(--purple-400);opacity:.5}
+
+  /* ══════════════════════════════════════════════
+     COLOR SYSTEM
+     ══════════════════════════════════════════════ */
+  .color-palette{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.15rem;margin-top:2rem}
+  .color-chip{border-radius:var(--r-md);overflow:hidden;border:1px solid rgba(6,182,212,.06);transition:transform .2s,box-shadow .3s;cursor:default}
+  .color-chip:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.4)}
+  .color-swatch{height:88px;position:relative}
+  .color-swatch::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 35%,rgba(255,255,255,.1) 0%,transparent 60%)}
+  .color-info{padding:.8rem 1.1rem;background:var(--navy-900)}
+  .color-name{font-weight:600;font-size:.88rem;margin-bottom:.15rem}
+  .color-hex{font-family:var(--mono);font-size:.78rem;color:var(--fg-muted)}
+  .color-hsl{font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost);display:block;margin-top:.1rem}
+
+  .color-strip{display:flex;border-radius:var(--r-md);overflow:hidden;border:1px solid rgba(6,182,212,.06);margin-top:1.5rem}
+  .color-strip-item{flex:1;height:64px;transition:flex .3s;cursor:default;position:relative}
+  .color-strip-item:hover{flex:2.5}
+  .color-strip-item span{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);font-size:.62rem;font-family:var(--mono);opacity:0;transition:opacity .2s;white-space:nowrap;background:rgba(0,0,0,.75);padding:2px 7px;border-radius:4px}
+  .color-strip-item:hover span{opacity:1}
+
+  .color-group{margin-top:3rem}
+  .color-group-title{font-size:.9rem;font-weight:600;margin-bottom:1rem;color:rgba(232,236,244,.6)}
+
+  /* Surface depth */
+  .surface-demo{display:flex;gap:0;border-radius:var(--r-lg);overflow:hidden;margin-top:1.25rem;border:1px solid rgba(255,255,255,.03)}
+  .surface-level{flex:1;padding:1.75rem 1.25rem;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem}
+  .surface-level .lbl{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:rgba(232,236,244,.35)}
+  .surface-level .val{font-family:var(--mono);font-size:.65rem;color:var(--fg-ghost)}
+
+  /* Channel badges */
+  .channel-row{display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap}
+  .channel-badge{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.75rem;border-radius:var(--r-md);background:var(--navy-900);border:1px solid rgba(255,255,255,.04);flex:1;min-width:260px;transition:border-color .3s}
+  .channel-badge:hover{border-color:rgba(255,255,255,.08)}
+  .channel-dot{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+  .channel-dot.wa{background:rgba(37,211,102,.1);color:var(--whatsapp)}
+  .channel-dot.ig{background:rgba(225,48,108,.1);color:var(--instagram)}
+  .channel-name{font-weight:600;font-size:.92rem}
+  .channel-hex{font-family:var(--mono);font-size:.78rem;color:var(--fg-muted)}
+
+  /* ══════════════════════════════════════════════
+     TYPOGRAPHY
+     ══════════════════════════════════════════════ */
+  .type-specimen{margin-top:2.5rem}
+  .type-row{padding:1.75rem 0;border-bottom:1px solid rgba(6,182,212,.03);display:grid;grid-template-columns:170px 1fr;gap:2rem;align-items:baseline}
+  .type-meta{font-size:.72rem;color:var(--fg-muted)}
+  .type-meta strong{display:block;color:rgba(232,236,244,.65);font-size:.82rem;margin-bottom:.2rem}
+  .type-meta code{font-family:var(--mono);font-size:.68rem;color:var(--cyan-500)}
+
+  /* ══════════════════════════════════════════════
+     EFFECTS
+     ══════════════════════════════════════════════ */
+  .effects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+  .effect-card{border-radius:var(--r-lg);padding:1.75rem;position:relative;overflow:hidden;border:1px solid rgba(6,182,212,.06);background:var(--navy-900);transition:border-color .3s}
+  .effect-card:hover{border-color:rgba(6,182,212,.12)}
+  .effect-card h4{font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+  .effect-card p{font-size:.82rem;color:var(--fg-dim);margin-bottom:1rem;line-height:1.6}
+  .effect-demo{height:80px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-family:var(--mono);color:var(--fg-muted)}
+  .glass-demo{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(20px)}
+  .glow-demo{background:rgba(6,182,212,.05);box-shadow:0 0 24px rgba(6,182,212,.12),0 0 60px rgba(6,182,212,.04);border:1px solid rgba(6,182,212,.12)}
+  .gradient-demo{background:linear-gradient(135deg,var(--navy-900) 0%,var(--navy-800) 50%,rgba(6,182,212,.06) 100%);border:1px solid rgba(255,255,255,.04)}
+  .neon-demo{background:var(--navy-950);border:1px solid rgba(6,182,212,.15);box-shadow:inset 0 0 30px rgba(6,182,212,.04),0 0 15px rgba(6,182,212,.08)}
+  .purple-demo{background:rgba(139,92,246,.04);box-shadow:0 0 20px rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.1)}
+  .mesh-demo{background:radial-gradient(circle at 20% 30%,rgba(6,182,212,.08) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(139,92,246,.06) 0%,transparent 50%),var(--navy-950);border:1px solid rgba(255,255,255,.04)}
+
+  /* ══════════════════════════════════════════════
+     SPACING
+     ══════════════════════════════════════════════ */
+  .space-row{display:flex;align-items:center;gap:1.5rem;margin-bottom:.65rem}
+  .space-bar{height:22px;border-radius:6px;background:linear-gradient(90deg,var(--cyan-600),var(--cyan-400));opacity:.5;transition:opacity .2s}
+  .space-bar:hover{opacity:.8}
+  .space-label{min-width:110px;font-family:var(--mono);font-size:.78rem;color:var(--fg-dim)}
+  .space-value{font-family:var(--mono);font-size:.7rem;color:var(--fg-ghost)}
+
+  /* ══════════════════════════════════════════════
+     VOICE & TONE
+     ══════════════════════════════════════════════ */
+  .voice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-top:2.5rem}
+  .voice-card{border-radius:var(--r-lg);padding:1.5rem;background:var(--navy-900);border:1px solid rgba(6,182,212,.06);transition:border-color .3s,box-shadow .3s}
+  .voice-card:hover{border-color:rgba(6,182,212,.12);box-shadow:0 0 30px rgba(6,182,212,.04)}
+  .voice-card h4{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+  .voice-card p{font-size:.88rem;color:var(--fg-dim);line-height:1.7}
+  .voice-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:.6rem}
+
+  /* Copy examples */
+  .copy-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem}
+  .copy-card{padding:1.5rem;border-radius:var(--r-md);background:var(--navy-900);border:1px solid rgba(255,255,255,.04)}
+  .copy-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
+
+  /* ══════════════════════════════════════════════
+     RULES
+     ══════════════════════════════════════════════ */
+  .rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+  .rule-card{border-radius:var(--r-lg);padding:1.75rem;border:1px solid rgba(255,255,255,.04);background:var(--navy-900)}
+  .rule-card.do{border-top:3px solid var(--success);box-shadow:0 -4px 24px rgba(34,197,94,.04)}
+  .rule-card.dont{border-top:3px solid var(--danger);box-shadow:0 -4px 24px rgba(239,68,68,.04)}
+  .rule-badge{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:.2rem .7rem;border-radius:var(--r-full);margin-bottom:.85rem}
+  .do .rule-badge{background:rgba(34,197,94,.08);color:var(--success)}
+  .dont .rule-badge{background:rgba(239,68,68,.08);color:var(--danger)}
+  .rule-card ul{list-style:none}
+  .rule-card li{padding:.35rem 0 .35rem 1.15rem;position:relative;font-size:.88rem;color:rgba(232,236,244,.6)}
+  .do li::before{content:'✓';position:absolute;left:0;color:var(--success);font-weight:700;font-size:.82rem}
+  .dont li::before{content:'✕';position:absolute;left:0;color:var(--danger);font-weight:700;font-size:.82rem}
+
+  /* ══════════════════════════════════════════════
+     APPLICATIONS
+     ══════════════════════════════════════════════ */
+  .app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3rem}
+  .app-card{border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(6,182,212,.06);background:var(--navy-900);transition:border-color .3s}
+  .app-card:hover{border-color:rgba(6,182,212,.1)}
+  .app-card-label{font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);padding:1rem 1.5rem 0}
+
+  /* ══════════════════════════════════════════════
+     TOKENS CODE
+     ══════════════════════════════════════════════ */
+  .code-block{background:var(--navy-900);border-radius:var(--r-lg);border:1px solid rgba(6,182,212,.06);overflow:hidden;margin-top:2rem}
+  .code-header{padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:.65rem}
+  .code-dot{width:10px;height:10px;border-radius:50%}
+  .code-title{font-family:var(--mono);font-size:.72rem;color:var(--fg-muted);margin-left:.5rem}
+  .code-body{padding:1.5rem;font-family:var(--mono);font-size:.78rem;line-height:1.9;color:rgba(232,236,244,.55);overflow-x:auto;white-space:pre}
+  .code-body .cm{color:var(--cyan-500)}
+  .code-body .val{color:var(--cyan-300)}
+  .code-body .dim{color:var(--fg-ghost)}
+  .code-body .purp{color:var(--purple-400)}
+
+  /* ══════════════════════════════════════════════
+     SIZES
+     ══════════════════════════════════════════════ */
+  .size-row{display:flex;align-items:flex-end;gap:2.5rem;margin-top:3rem;flex-wrap:wrap}
+  .size-item{display:flex;flex-direction:column;align-items:center;gap:.75rem}
+  .size-meta{font-family:var(--mono);font-size:.7rem;color:var(--fg-ghost);text-align:center}
+
+  /* ══════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════ */
+  footer{text-align:center;padding:4rem 0;color:var(--fg-muted);font-size:.85rem;border-top:1px solid rgba(6,182,212,.04)}
+  footer strong{color:rgba(232,236,244,.5)}
+
+  /* Responsive */
+  @media(max-width:768px){
+    .hero h1{font-size:2.8rem}
+    .section-title{font-size:1.8rem}
+    .construct-grid,.rules-grid,.copy-grid{grid-template-columns:1fr}
+    .type-row{grid-template-columns:1fr;gap:.4rem}
+    .logo-grid{grid-template-columns:1fr}
+    nav .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Flow<span>Pilot</span></div>
+    <ul class="nav-links">
+      <li><a href="#logo">Logo</a></li>
+      <li><a href="#symbol">Simbolo</a></li>
+      <li><a href="#colors">Cores</a></li>
+      <li><a href="#typography">Tipo</a></li>
+      <li><a href="#effects">Efeitos</a></li>
+      <li><a href="#voice">Voz</a></li>
+      <li><a href="#rules">Regras</a></li>
+      <li><a href="#apps">Aplicacoes</a></li>
+      <li><a href="#tokens">Tokens</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-badge">Brand Book Oficial — Neon Pulse</div>
+  <h1><span class="flow">Flow</span><span class="pilot">Pilot</span></h1>
+  <p class="hero-sub">Manual completo de identidade visual da plataforma de automacao inteligente para WhatsApp & Instagram. Energia que pulsa, conversoes que acontecem.</p>
+  <p class="hero-version">v2.0 — Marco 2026</p>
+</section>
+
+<!-- ═══════════════════ 01. LOGO ═══════════════════ -->
+<section id="logo">
+  <div class="section-num">01</div>
+  <div class="section-label">Sistema de Logo</div>
+  <h2 class="section-title">Neon Pulse</h2>
+  <p class="section-desc">O logo FlowPilot combina chevrons curvos com glow neon e dual-tone cyan/purple. Cada versao mantém a mesma energia — do ícone ao wordmark completo.</p>
+
+  <div class="logo-grid">
+    <!-- PRIMARY DARK -->
+    <div class="logo-card dark">
+      <div class="card-label">Primario — Fundo Escuro</div>
+      <svg viewBox="0 0 420 80" width="340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22d3ee"/><stop offset="50%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient>
+          <filter id="gl1"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="gl2"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g transform="translate(10,8)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity=".2" filter="url(#gl1)"/>
+          <path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" filter="url(#gl1)"/>
+          <path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" opacity=".7" filter="url(#gl1)"/>
+          <path d="M34 24 C40 28,44 32,48 36 C44 40,40 42,34 46" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" opacity=".45" filter="url(#gl1)"/>
+          <circle cx="32" cy="32" r="4" fill="#06b6d4" filter="url(#gl2)">
+            <animate attributeName="r" values="4;5;4" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="32" cy="32" r="8" fill="none" stroke="#06b6d4" stroke-width=".5" opacity=".25">
+            <animate attributeName="r" values="8;14;8" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".25;0;.25" dur="3s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <text x="82" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#e8ecf4">Flow</text>
+        <text x="190" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="url(#g1)">Pilot</text>
+      </svg>
+    </div>
+
+    <!-- LIGHT -->
+    <div class="logo-card light">
+      <div class="card-label">Primario — Fundo Claro</div>
+      <svg viewBox="0 0 420 80" width="340" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0891b2"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs>
+        <g transform="translate(10,8)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="url(#g2)" stroke-width="1.5" opacity=".15"/>
+          <path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          <path d="M34 24 C40 28,44 32,48 36 C44 40,40 42,34 46" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+          <circle cx="32" cy="32" r="3.5" fill="#0891b2"/>
+        </g>
+        <text x="82" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#0f172a">Flow</text>
+        <text x="190" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="url(#g2)">Pilot</text>
+      </svg>
+    </div>
+
+    <!-- ICON -->
+    <div class="logo-card accent">
+      <div class="card-label" style="color:rgba(255,255,255,.55)">Icone App</div>
+      <svg viewBox="0 0 64 64" width="72" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gi" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0891b2"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient>
+          <filter id="igl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <rect width="64" height="64" rx="16" fill="url(#gi)"/>
+        <g transform="translate(10,10)" filter="url(#igl)">
+          <path d="M8 14 C13 18,16 20,19 22 C16 24,13 26,8 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <path d="M18 8 C24 13,27 15,30 17 C27 19,24 21,18 26" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+          <circle cx="22" cy="22" r="3.5" fill="#fff"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- MONO WHITE -->
+    <div class="logo-card gradient">
+      <div class="card-label">Monocromatico Branco</div>
+      <svg viewBox="0 0 420 80" width="300" xmlns="http://www.w3.org/2000/svg">
+        <defs><filter id="glm"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+        <g transform="translate(10,8)" filter="url(#glm)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="#fff" stroke-width="1.5" opacity=".1"/>
+          <path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+          <path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+          <path d="M34 24 C40 28,44 32,48 36 C44 40,40 42,34 46" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".2"/>
+          <circle cx="32" cy="32" r="4" fill="#fff" opacity=".85"/>
+        </g>
+        <text x="82" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#fff">Flow</text>
+        <text x="190" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#fff" opacity=".6">Pilot</text>
+      </svg>
+    </div>
+
+    <!-- DUAL-TONE PURPLE -->
+    <div class="logo-card purple">
+      <div class="card-label">Dual-Tone Purple</div>
+      <svg viewBox="0 0 420 80" width="300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gp" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient>
+          <filter id="glp"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g transform="translate(10,8)" filter="url(#glp)">
+          <circle cx="32" cy="32" r="28" fill="none" stroke="url(#gp)" stroke-width="1.5" opacity=".2"/>
+          <path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" opacity=".65"/>
+          <path d="M34 24 C40 28,44 32,48 36 C44 40,40 42,34 46" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+          <circle cx="32" cy="32" r="4" fill="url(#gp)"/>
+        </g>
+        <text x="82" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#fff">Flow</text>
+        <text x="190" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="url(#gp)">Pilot</text>
+      </svg>
+    </div>
+
+    <!-- FAVICON -->
+    <div class="logo-card dark" style="min-height:180px">
+      <div class="card-label">Favicon / Badge</div>
+      <div style="display:flex;align-items:flex-end;gap:2rem">
+        <div style="text-align:center">
+          <svg viewBox="0 0 64 64" width="16" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="#06b6d4"/><text x="32" y="42" font-family="Inter,sans-serif" font-weight="900" font-size="30" fill="#fff" text-anchor="middle">FP</text></svg>
+          <div style="font-family:var(--mono);font-size:.62rem;color:var(--fg-ghost);margin-top:.5rem">16px</div>
+        </div>
+        <div style="text-align:center">
+          <svg viewBox="0 0 64 64" width="32" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="fv" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0891b2"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient><filter id="fvg"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <rect width="64" height="64" rx="14" fill="url(#fv)"/>
+            <g transform="translate(12,12)" filter="url(#fvg)"><path d="M6 12 C10 16,13 18,16 20 C13 22,10 24,6 28" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/><circle cx="20" cy="20" r="3.5" fill="#fff"/></g>
+          </svg>
+          <div style="font-family:var(--mono);font-size:.62rem;color:var(--fg-ghost);margin-top:.5rem">32px</div>
+        </div>
+        <div style="text-align:center">
+          <svg viewBox="0 0 64 64" width="48" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="fvg2"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <rect width="64" height="64" rx="14" fill="url(#fv)"/>
+            <g transform="translate(10,10)" filter="url(#fvg2)">
+              <path d="M8 14 C13 18,16 20,19 22 C16 24,13 26,8 30" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+              <path d="M18 8 C24 13,27 15,30 17 C27 19,24 21,18 26" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+              <circle cx="22" cy="22" r="3" fill="#fff"/>
+            </g>
+          </svg>
+          <div style="font-family:var(--mono);font-size:.62rem;color:var(--fg-ghost);margin-top:.5rem">48px</div>
+        </div>
+        <div style="text-align:center">
+          <svg viewBox="0 0 64 64" width="64" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="14" fill="url(#fv)"/>
+            <g transform="translate(10,10)" filter="url(#fvg2)">
+              <circle cx="22" cy="22" r="17" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+              <path d="M8 14 C13 18,16 20,19 22 C16 24,13 26,8 30" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M18 8 C24 13,27 15,30 17 C27 19,24 21,18 26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+              <path d="M26 18 C30 21,32 23,34 25 C32 27,30 29,26 32" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity=".25"/>
+              <circle cx="22" cy="22" r="3" fill="#fff"/>
+            </g>
+          </svg>
+          <div style="font-family:var(--mono);font-size:.62rem;color:var(--fg-ghost);margin-top:.5rem">64px</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 02. SYMBOL ═══════════════════ -->
+<section id="symbol">
+  <div class="section-num">02</div>
+  <div class="section-label">Construcao do Simbolo</div>
+  <h2 class="section-title">Anatomia Neon Pulse</h2>
+
+  <div class="construct-grid">
+    <svg viewBox="0 0 400 400" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="cgl"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="o1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#06b6d4" stop-opacity=".07"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <radialGradient id="o2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#8b5cf6" stop-opacity=".05"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      </defs>
+      <circle cx="170" cy="170" r="200" fill="url(#o1)"/>
+      <circle cx="260" cy="250" r="150" fill="url(#o2)"/>
+      <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(6,182,212,.05)" stroke-width="1"/>
+      <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(139,92,246,.04)" stroke-width=".75"/>
+      <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(6,182,212,.03)" stroke-width=".5"/>
+      <g filter="url(#cgl)">
+        <path d="M75 125 C120 165,150 185,170 200 C150 215,120 235,75 275" fill="none" stroke="#06b6d4" stroke-width="8" stroke-linecap="round"/>
+        <path d="M140 70 C195 115,220 145,245 170 C220 195,195 220,140 265" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round" opacity=".6"/>
+        <path d="M200 135 C240 160,260 180,285 200 C260 220,240 245,200 270" fill="none" stroke="#8b5cf6" stroke-width="4" stroke-linecap="round" opacity=".4"/>
+      </g>
+      <circle cx="200" cy="200" r="14" fill="rgba(6,182,212,.15)" filter="url(#cgl)"/>
+      <circle cx="200" cy="200" r="7" fill="#06b6d4" filter="url(#cgl)"/>
+      <text x="60" y="120" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(6,182,212,.35)">Bezier curves</text>
+      <text x="265" y="135" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(139,92,246,.3)">Purple = IA layer</text>
+      <text x="200" y="392" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(232,236,244,.15)" text-anchor="middle">Pulse rings: 80u / 120u / 160u</text>
+    </svg>
+    <div class="construct-text">
+      <h3>Curvas Fluidas + Dual-Tone</h3>
+      <p>O simbolo Neon Pulse substitui linhas retas por curvas Bezier — representando o fluxo organico de conversas. A terceira camada em purple marca a camada de inteligencia artificial. O glow neon SVG filter da vida ao simbolo.</p>
+      <ul>
+        <li><strong>Curva Cyan (#06B6D4):</strong> Fluxo de mensagens — WhatsApp, Instagram</li>
+        <li><strong>Curva Cyan Light (#22D3EE):</strong> Automacoes processando em tempo real</li>
+        <li><strong>Curva Purple (#8B5CF6):</strong> Camada de IA — agentes inteligentes</li>
+        <li><strong>Pulse Node:</strong> Pulsacao continua — o sistema nunca para</li>
+        <li><strong>Glow Filter:</strong> feGaussianBlur + feMerge em todos os tracos</li>
+        <li><strong>Pulse Rings:</strong> Ondas expandindo — energia irradiando do centro</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 03. COLORS ═══════════════════ -->
+<section id="colors">
+  <div class="section-num">03</div>
+  <div class="section-label">Sistema de Cores</div>
+  <h2 class="section-title">Paleta Neon Pulse</h2>
+  <p class="section-desc">Dual-tone cyan/purple com profundidade navy. Navy ultra-escuro (#050A14) maximiza o contraste do glow neon.</p>
+
+  <!-- Cyan -->
+  <div class="color-group">
+    <div class="color-group-title">Cyan — Cor Primaria</div>
+    <div class="color-strip">
+      <div class="color-strip-item" style="background:#ecfeff"><span style="color:#164e63">50</span></div>
+      <div class="color-strip-item" style="background:#cffafe"><span style="color:#164e63">100</span></div>
+      <div class="color-strip-item" style="background:#a5f3fc"><span style="color:#164e63">200</span></div>
+      <div class="color-strip-item" style="background:#67e8f9"><span style="color:#164e63">300</span></div>
+      <div class="color-strip-item" style="background:#22d3ee"><span>400</span></div>
+      <div class="color-strip-item" style="background:#06b6d4"><span>500 ★</span></div>
+      <div class="color-strip-item" style="background:#0891b2"><span>600</span></div>
+      <div class="color-strip-item" style="background:#0e7490"><span>700</span></div>
+      <div class="color-strip-item" style="background:#155e75"><span>800</span></div>
+      <div class="color-strip-item" style="background:#164e63"><span>900</span></div>
+      <div class="color-strip-item" style="background:#083344"><span>950</span></div>
+    </div>
+  </div>
+
+  <!-- Purple -->
+  <div class="color-group">
+    <div class="color-group-title">Purple — Acento IA</div>
+    <div class="color-strip">
+      <div class="color-strip-item" style="background:#ddd6fe"><span style="color:#4c1d95">200</span></div>
+      <div class="color-strip-item" style="background:#c4b5fd"><span style="color:#4c1d95">300</span></div>
+      <div class="color-strip-item" style="background:#a78bfa"><span>400</span></div>
+      <div class="color-strip-item" style="background:#8b5cf6"><span>500 ★</span></div>
+      <div class="color-strip-item" style="background:#7c3aed"><span>600</span></div>
+      <div class="color-strip-item" style="background:#6d28d9"><span>700</span></div>
+    </div>
+  </div>
+
+  <!-- Navy -->
+  <div class="color-group">
+    <div class="color-group-title">Navy — Superficies</div>
+    <div class="color-strip">
+      <div class="color-strip-item" style="background:#050a14"><span>950</span></div>
+      <div class="color-strip-item" style="background:#0a1225"><span>900</span></div>
+      <div class="color-strip-item" style="background:#0d1730"><span>850</span></div>
+      <div class="color-strip-item" style="background:#111d3a"><span>800</span></div>
+      <div class="color-strip-item" style="background:#162950"><span>700</span></div>
+      <div class="color-strip-item" style="background:#1e3566"><span>600</span></div>
+    </div>
+  </div>
+
+  <!-- Main palette cards -->
+  <div class="color-palette" style="margin-top:3rem">
+    <div class="color-chip"><div class="color-swatch" style="background:linear-gradient(135deg,#22d3ee,#06b6d4)"></div><div class="color-info"><div class="color-name">Cyan 500</div><div class="color-hex">#06B6D4</div><span class="color-hsl">hsl(187 94% 43%)</span></div></div>
+    <div class="color-chip"><div class="color-swatch" style="background:linear-gradient(135deg,#a78bfa,#8b5cf6)"></div><div class="color-info"><div class="color-name">Purple 500</div><div class="color-hex">#8B5CF6</div><span class="color-hsl">hsl(258 90% 66%)</span></div></div>
+    <div class="color-chip"><div class="color-swatch" style="background:#050a14"></div><div class="color-info"><div class="color-name">Navy 950</div><div class="color-hex">#050A14</div><span class="color-hsl">Background</span></div></div>
+    <div class="color-chip"><div class="color-swatch" style="background:#0a1225"></div><div class="color-info"><div class="color-name">Navy 900</div><div class="color-hex">#0A1225</div><span class="color-hsl">Card / Surface</span></div></div>
+    <div class="color-chip"><div class="color-swatch" style="background:#e8ecf4"></div><div class="color-info"><div class="color-name">Foreground</div><div class="color-hex">#E8ECF4</div><span class="color-hsl">hsl(213 27% 97%)</span></div></div>
+  </div>
+
+  <!-- Semantic -->
+  <div class="color-group">
+    <div class="color-group-title">Semanticas</div>
+    <div class="color-palette">
+      <div class="color-chip"><div class="color-swatch" style="background:#22c55e"></div><div class="color-info"><div class="color-name">Success</div><div class="color-hex">#22C55E</div></div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#f59e0b"></div><div class="color-info"><div class="color-name">Warning</div><div class="color-hex">#F59E0B</div></div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#ef4444"></div><div class="color-info"><div class="color-name">Danger</div><div class="color-hex">#EF4444</div></div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#3b82f6"></div><div class="color-info"><div class="color-name">Info</div><div class="color-hex">#3B82F6</div></div></div>
+    </div>
+  </div>
+
+  <!-- Channels -->
+  <div class="color-group">
+    <div class="color-group-title">Canais</div>
+    <div class="channel-row">
+      <div class="channel-badge">
+        <div class="channel-dot wa"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+        <div><div class="channel-name">WhatsApp</div><div class="channel-hex">#25D366</div></div>
+      </div>
+      <div class="channel-badge">
+        <div class="channel-dot ig"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div><div class="channel-name">Instagram</div><div class="channel-hex">#E1306C</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Surfaces -->
+  <div class="color-group">
+    <div class="color-group-title">Hierarquia de Superficie</div>
+    <div class="surface-demo">
+      <div class="surface-level" style="background:#050a14"><div class="lbl">Base</div><div class="val">#050A14</div></div>
+      <div class="surface-level" style="background:#0a1225"><div class="lbl">Card</div><div class="val">#0A1225</div></div>
+      <div class="surface-level" style="background:#0d1730"><div class="lbl">Elevated</div><div class="val">#0D1730</div></div>
+      <div class="surface-level" style="background:#111d3a"><div class="lbl">Popover</div><div class="val">#111D3A</div></div>
+      <div class="surface-level" style="background:#162950"><div class="lbl">Overlay</div><div class="val">#162950</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 04. TYPOGRAPHY ═══════════════════ -->
+<section id="typography">
+  <div class="section-num">04</div>
+  <div class="section-label">Tipografia</div>
+  <h2 class="section-title">Escala Tipografica</h2>
+  <p class="section-desc">Inter para interfaces e corpo, JetBrains Mono para codigo e dados. Geist Sans como alternativa para headings.</p>
+
+  <div class="type-specimen">
+    <div class="type-row"><div class="type-meta"><strong>Display 1</strong>4rem / 900<br><code>letter-spacing: -0.04em</code></div><div style="font-size:4rem;font-weight:900;letter-spacing:-.04em;line-height:1.08;background:linear-gradient(135deg,#fff,var(--cyan-300),var(--purple-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Energia pura.</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Display 2</strong>3rem / 800<br><code>letter-spacing: -0.03em</code></div><div style="font-size:3rem;font-weight:800;letter-spacing:-.03em;line-height:1.15">Conversas que convertem.</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Heading 1</strong>2.25rem / 700<br><code>letter-spacing: -0.025em</code></div><div style="font-size:2.25rem;font-weight:700;letter-spacing:-.025em;line-height:1.2">Dashboard de Leads</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Heading 2</strong>1.75rem / 700<br><code>letter-spacing: -0.02em</code></div><div style="font-size:1.75rem;font-weight:700;letter-spacing:-.02em;line-height:1.3">Automacoes Ativas</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Heading 3</strong>1.25rem / 600<br><code>letter-spacing: -0.01em</code></div><div style="font-size:1.25rem;font-weight:600;letter-spacing:-.01em;line-height:1.4">Configuracoes do Bot</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Body</strong>1rem / 400<br><code>line-height: 1.7</code></div><div style="font-size:1rem;color:rgba(232,236,244,.65);line-height:1.7">Gerencie todas as suas conversas de WhatsApp e Instagram em um unico painel. Crie automacoes inteligentes que respondem, qualificam e convertem leads automaticamente.</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Small</strong>0.875rem / 400<br><code>line-height: 1.6</code></div><div style="font-size:.875rem;color:rgba(232,236,244,.45);line-height:1.6">Ultima atualizacao ha 5 minutos · 24 leads ativos · 3 automacoes rodando</div></div>
+    <div class="type-row"><div class="type-meta"><strong>Mono</strong>0.875rem / 400<br><code>JetBrains Mono</code></div><div style="font-family:var(--mono);font-size:.875rem;color:var(--cyan-400)">await flow.pulse({ energy: 'max', glow: true })</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 05. EFFECTS ═══════════════════ -->
+<section id="effects">
+  <div class="section-num">05</div>
+  <div class="section-label">Efeitos & Materiais</div>
+  <h2 class="section-title">Linguagem Visual</h2>
+  <p class="section-desc">Glassmorphism, glow neon, gradientes, mesh backgrounds e o acento purple que diferencia o Neon Pulse.</p>
+
+  <div class="effects-grid">
+    <div class="effect-card"><h4>Glass</h4><p>Cards e overlays com blur</p><div class="effect-demo glass-demo">backdrop-filter: blur(20px)</div></div>
+    <div class="effect-card"><h4>Cyan Glow</h4><p>Elementos interativos primarios</p><div class="effect-demo glow-demo">box-shadow: 0 0 24px cyan/0.12</div></div>
+    <div class="effect-card"><h4>Purple Accent</h4><p>Elementos de IA e inteligencia</p><div class="effect-demo purple-demo">box-shadow: 0 0 20px purple/0.08</div></div>
+    <div class="effect-card"><h4>Neon Border</h4><p>CTAs e highlights importantes</p><div class="effect-demo neon-demo">inset glow + outer glow</div></div>
+    <div class="effect-card"><h4>Surface Gradient</h4><p>Backgrounds de secao</p><div class="effect-demo gradient-demo">linear-gradient(135deg, ...)</div></div>
+    <div class="effect-card"><h4>Mesh Background</h4><p>Ambientes imersivos</p><div class="effect-demo mesh-demo">radial-gradient orbs</div></div>
+  </div>
+
+  <!-- Border Radius -->
+  <div class="subsection">
+    <div class="sub-title">Border Radius</div>
+    <div style="display:flex;gap:2rem;align-items:flex-end;flex-wrap:wrap">
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:8px;background:var(--navy-800);border:1px solid rgba(6,182,212,.12);margin:0 auto .4rem"></div><span style="font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost)">sm: 8px</span></div>
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:12px;background:var(--navy-800);border:1px solid rgba(6,182,212,.12);margin:0 auto .4rem"></div><span style="font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost)">md: 12px</span></div>
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:16px;background:var(--navy-800);border:1px solid rgba(6,182,212,.12);margin:0 auto .4rem"></div><span style="font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost)">lg: 16px</span></div>
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:20px;background:var(--navy-800);border:1px solid rgba(6,182,212,.12);margin:0 auto .4rem"></div><span style="font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost)">xl: 20px</span></div>
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:24px;background:var(--navy-800);border:1px solid rgba(6,182,212,.12);margin:0 auto .4rem"></div><span style="font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost)">2xl: 24px</span></div>
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:9999px;background:var(--navy-800);border:1px solid rgba(6,182,212,.12);margin:0 auto .4rem"></div><span style="font-family:var(--mono);font-size:.68rem;color:var(--fg-ghost)">full</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 06. SPACING ═══════════════════ -->
+<section id="spacing">
+  <div class="section-num">06</div>
+  <div class="section-label">Espacamento</div>
+  <h2 class="section-title">Grid & Espacamento</h2>
+  <p class="section-desc">Base 4px, compativel com Tailwind CSS.</p>
+  <div style="margin-top:2.5rem">
+    <div class="space-row"><div class="space-label">4px — 0.25rem</div><div class="space-bar" style="width:16px"></div><div class="space-value">space-1</div></div>
+    <div class="space-row"><div class="space-label">8px — 0.5rem</div><div class="space-bar" style="width:32px"></div><div class="space-value">space-2</div></div>
+    <div class="space-row"><div class="space-label">12px — 0.75rem</div><div class="space-bar" style="width:48px"></div><div class="space-value">space-3</div></div>
+    <div class="space-row"><div class="space-label">16px — 1rem</div><div class="space-bar" style="width:64px"></div><div class="space-value">space-4</div></div>
+    <div class="space-row"><div class="space-label">24px — 1.5rem</div><div class="space-bar" style="width:96px"></div><div class="space-value">space-6</div></div>
+    <div class="space-row"><div class="space-label">32px — 2rem</div><div class="space-bar" style="width:128px"></div><div class="space-value">space-8</div></div>
+    <div class="space-row"><div class="space-label">48px — 3rem</div><div class="space-bar" style="width:192px"></div><div class="space-value">space-12</div></div>
+    <div class="space-row"><div class="space-label">64px — 4rem</div><div class="space-bar" style="width:256px"></div><div class="space-value">space-16</div></div>
+    <div class="space-row"><div class="space-label">96px — 6rem</div><div class="space-bar" style="width:384px"></div><div class="space-value">space-24</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 07. VOICE ═══════════════════ -->
+<section id="voice">
+  <div class="section-num">07</div>
+  <div class="section-label">Voz & Tom</div>
+  <h2 class="section-title">Personalidade Neon Pulse</h2>
+  <p class="section-desc">Energia que converte. Direto, energetico, confiante — e nunca arrogante.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card"><div class="voice-icon" style="background:rgba(6,182,212,.1);color:var(--cyan-400)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h4>Energetico</h4><p>Transmite urgencia positiva. "Seus leads estao esperando — ative agora." Cada palavra carrega impulso.</p></div>
+    <div class="voice-card"><div class="voice-icon" style="background:rgba(139,92,246,.1);color:var(--purple-400)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><h4>Dinamico</h4><p>Sempre em movimento. Metricas ao vivo, pulsos em tempo real, numeros que sobem.</p></div>
+    <div class="voice-card"><div class="voice-icon" style="background:rgba(34,197,94,.1);color:var(--success)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Resultado</h4><p>Focado em conversao. Dados reais, metricas que vendem, ROI que aparece.</p></div>
+    <div class="voice-card"><div class="voice-icon" style="background:rgba(245,158,11,.1);color:var(--warning)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h4>Bold</h4><p>Nao tem medo de ser direto. "Para de perder lead. Automatize." Sem rodeios.</p></div>
+  </div>
+
+  <div class="subsection">
+    <div class="sub-title">Exemplos de Copy</div>
+    <div class="copy-grid">
+      <div class="copy-card"><div class="copy-tag" style="color:var(--success)">Como escrevemos</div><p style="font-size:.9rem;color:rgba(232,236,244,.65);line-height:1.7">"Seus leads respondidos em segundos, nao horas. Automacao que converte enquanto voce dorme."</p></div>
+      <div class="copy-card"><div class="copy-tag" style="color:var(--danger)">Como NAO escrevemos</div><p style="font-size:.9rem;color:rgba(232,236,244,.65);line-height:1.7">"Nossa solucao disruptiva de automacao omnichannel com inteligencia artificial de ponta revoluciona o paradigma..."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 08. RULES ═══════════════════ -->
+<section id="rules">
+  <div class="section-num">08</div>
+  <div class="section-label">Regras de Uso</div>
+  <h2 class="section-title">Faca e Nao Faca</h2>
+  <p class="section-desc">Diretrizes para manter a energia e integridade da marca Neon Pulse.</p>
+
+  <div class="rules-grid">
+    <div class="rule-card do">
+      <div class="rule-badge">Correto</div>
+      <ul>
+        <li>"FlowPilot" como uma palavra (CamelCase)</li>
+        <li>Glow filter no simbolo sobre fundos escuros</li>
+        <li>Curvas Bezier (nunca linhas retas nos chevrons)</li>
+        <li>Purple como acento secundario (max 30%)</li>
+        <li>Pulse animation no node em contextos digitais</li>
+        <li>Area de protecao: 1x altura do icone</li>
+        <li>Contraste minimo WCAG AA (4.5:1)</li>
+        <li>Versao sem glow para fundos claros</li>
+      </ul>
+    </div>
+    <div class="rule-card dont">
+      <div class="rule-badge">Incorreto</div>
+      <ul>
+        <li>Glow em fundos claros (imperceptivel)</li>
+        <li>Mais purple que cyan (inverte hierarquia)</li>
+        <li>Chevrons com stroke-linejoin miter (retas)</li>
+        <li>Animacoes em material impresso</li>
+        <li>Misturar com outros neon colors (rosa, verde)</li>
+        <li>Reduzir abaixo de 16px o simbolo</li>
+        <li>Adicionar sombras drop-shadow no wordmark</li>
+        <li>Alterar a ordem das cores dos chevrons</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Size minimums -->
+  <div class="subsection">
+    <div class="sub-title">Tamanhos Minimos</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+      <div style="padding:1.5rem;text-align:center;background:var(--navy-900);border-radius:var(--r-md);border:1px solid rgba(255,255,255,.04)"><div style="font-size:.82rem;font-weight:600;margin-bottom:.75rem">Digital</div><div style="font-family:var(--mono);font-size:2rem;color:var(--cyan-400);margin-bottom:.4rem">120px</div><div style="font-size:.72rem;color:var(--fg-ghost)">Largura min — Logo completo</div></div>
+      <div style="padding:1.5rem;text-align:center;background:var(--navy-900);border-radius:var(--r-md);border:1px solid rgba(255,255,255,.04)"><div style="font-size:.82rem;font-weight:600;margin-bottom:.75rem">Icone</div><div style="font-family:var(--mono);font-size:2rem;color:var(--cyan-400);margin-bottom:.4rem">16px</div><div style="font-size:.72rem;color:var(--fg-ghost)">Tamanho min — Favicon</div></div>
+      <div style="padding:1.5rem;text-align:center;background:var(--navy-900);border-radius:var(--r-md);border:1px solid rgba(255,255,255,.04)"><div style="font-size:.82rem;font-weight:600;margin-bottom:.75rem">Impresso</div><div style="font-family:var(--mono);font-size:2rem;color:var(--cyan-400);margin-bottom:.4rem">25mm</div><div style="font-size:.72rem;color:var(--fg-ghost)">Largura min — Print</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 09. APPLICATIONS ═══════════════════ -->
+<section id="apps">
+  <div class="section-num">09</div>
+  <div class="section-label">Aplicacoes</div>
+  <h2 class="section-title">Exemplos de Uso</h2>
+  <p class="section-desc">Como a marca Neon Pulse aparece nos diferentes pontos de contato.</p>
+
+  <div class="app-grid">
+    <!-- Sidebar -->
+    <div class="app-card">
+      <div class="app-card-label">App — Sidebar</div>
+      <div style="padding:1.15rem 1.5rem;display:flex;align-items:center;gap:.75rem;border-bottom:1px solid rgba(6,182,212,.04)">
+        <svg viewBox="0 0 64 64" width="34" height="34" xmlns="http://www.w3.org/2000/svg"><rect width="64" height="64" rx="14" fill="rgba(6,182,212,.1)"/><g transform="translate(12,12)"><path d="M6 12 C10 16,13 18,16 20 C13 22,10 24,6 28" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="#06b6d4"/></g></svg>
+        <div><div style="font-weight:700;font-size:.92rem">Flow<span style="color:var(--cyan-400)">Pilot</span></div><div style="font-size:.68rem;color:var(--fg-ghost)">Workspace de Gabriel</div></div>
+      </div>
+      <div style="padding:.6rem 1.5rem">
+        <div style="padding:.55rem .75rem;border-radius:8px;background:rgba(6,182,212,.06);display:flex;align-items:center;gap:.55rem;border-left:2px solid var(--cyan-400);box-shadow:inset 0 0 20px rgba(6,182,212,.03)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span style="font-size:.82rem;color:var(--cyan-400);font-weight:500">Dashboard</span></div>
+        <div style="padding:.55rem .75rem;display:flex;align-items:center;gap:.55rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(232,236,244,.3)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span style="font-size:.82rem;color:var(--fg-dim)">Leads</span></div>
+        <div style="padding:.55rem .75rem;display:flex;align-items:center;gap:.55rem"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(232,236,244,.3)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span style="font-size:.82rem;color:var(--fg-dim)">Mensagens</span></div>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="app-card" style="background:linear-gradient(135deg,var(--navy-900),var(--navy-800),rgba(6,182,212,.03))">
+      <div class="app-card-label">Social Media</div>
+      <div style="padding:2.5rem;text-align:center">
+        <svg viewBox="0 0 64 64" width="44" style="margin-bottom:1.25rem" xmlns="http://www.w3.org/2000/svg"><defs><filter id="sg"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(10,10)" filter="url(#sg)"><path d="M8 14 C13 18,16 20,19 22 C16 24,13 26,8 30" fill="none" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/><path d="M18 8 C24 13,27 15,30 17 C27 19,24 21,18 26" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" opacity=".6"/><circle cx="22" cy="22" r="3.5" fill="#06b6d4"/></g></svg>
+        <div style="font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem">Automatize seu<br><span style="background:linear-gradient(135deg,var(--cyan-300),var(--cyan-500));-webkit-background-clip:text;-webkit-text-fill-color:transparent">WhatsApp</span></div>
+        <div style="font-size:.78rem;color:var(--fg-dim);margin-bottom:1.5rem">Respostas instantaneas. Leads qualificados.</div>
+        <div style="display:inline-block;padding:.5rem 1.5rem;border-radius:var(--r-full);background:linear-gradient(135deg,var(--cyan-600),var(--cyan-500));font-size:.8rem;font-weight:600;color:#fff;box-shadow:0 0 20px rgba(6,182,212,.2)">Comece Gratis</div>
+      </div>
+    </div>
+
+    <!-- Email Sig -->
+    <div class="app-card" style="background:#f8fafc">
+      <div class="app-card-label" style="color:rgba(0,0,0,.3)">Email — Assinatura</div>
+      <div style="padding:1.5rem 2rem;margin-top:.5rem">
+        <div style="border-top:2px solid #06b6d4;padding-top:1rem">
+          <div style="font-weight:700;color:#0f172a;font-size:.88rem">Gabriel Rubim</div>
+          <div style="font-size:.78rem;color:#64748b">Fundador & CEO</div>
+          <div style="margin-top:.65rem">
+            <svg viewBox="0 0 420 80" width="95" xmlns="http://www.w3.org/2000/svg"><g transform="translate(10,8)"><path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round"/><path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity=".6"/><circle cx="32" cy="32" r="3" fill="#0891b2"/></g><text x="82" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#0f172a">Flow</text><text x="190" y="50" font-family="Inter,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#0891b2">Pilot</text></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="app-card" style="display:flex;align-items:center;justify-content:center;min-height:250px">
+      <div class="app-card-label">Loading State</div>
+      <div style="text-align:center">
+        <svg viewBox="0 0 64 64" width="52" xmlns="http://www.w3.org/2000/svg" style="animation:float 3s ease-in-out infinite">
+          <defs><filter id="lg"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <g transform="translate(10,10)" filter="url(#lg)">
+            <circle cx="22" cy="22" r="17" fill="none" stroke="rgba(6,182,212,.12)" stroke-width="1.5"><animate attributeName="r" values="17;19;17" dur="2.5s" repeatCount="indefinite"/></circle>
+            <path d="M8 14 C13 18,16 20,19 22 C16 24,13 26,8 30" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round"><animate attributeName="opacity" values="1;.4;1" dur="1.5s" repeatCount="indefinite"/></path>
+            <path d="M18 8 C24 13,27 15,30 17 C27 19,24 21,18 26" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" opacity=".55"><animate attributeName="opacity" values=".55;.2;.55" dur="1.5s" repeatCount="indefinite" begin=".2s"/></path>
+            <circle cx="22" cy="22" r="3" fill="#06b6d4"><animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/></circle>
+          </g>
+        </svg>
+        <div style="margin-top:.75rem;font-size:.75rem;color:var(--fg-ghost);font-family:var(--mono)">Carregando...</div>
+      </div>
+    </div>
+  </div>
+  <style>@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}</style>
+</section>
+
+<!-- ═══════════════════ 10. TOKENS ═══════════════════ -->
+<section id="tokens">
+  <div class="section-num">10</div>
+  <div class="section-label">Design Tokens</div>
+  <h2 class="section-title">Variaveis CSS</h2>
+  <p class="section-desc">Referencia tecnica dos tokens usados no codigo.</p>
+
+  <div class="code-block">
+    <div class="code-header">
+      <div class="code-dot" style="background:#ef4444"></div>
+      <div class="code-dot" style="background:#f59e0b"></div>
+      <div class="code-dot" style="background:#22c55e"></div>
+      <div class="code-title">globals.css — Neon Pulse Tokens</div>
+    </div>
+    <div class="code-body"><span class="cm">/* ═══ Primary Brand ═══ */</span>
+--primary: <span class="val">187 94% 43%</span>;              <span class="dim">/* #06B6D4 — Cyan */</span>
+--primary-foreground: <span class="val">220 60% 10%</span>;
+--primary-glow: <span class="val">187 94% 43% / 0.3</span>;    <span class="dim">/* Neon glow */</span>
+
+<span class="cm">/* ═══ Purple Accent (IA) ═══ */</span>
+--accent-purple: <span class="purp">258 90% 66%</span>;         <span class="dim">/* #8B5CF6 */</span>
+--accent-purple-glow: <span class="purp">258 90% 66% / 0.25</span>;
+
+<span class="cm">/* ═══ Dark Surfaces ═══ */</span>
+--background: <span class="val">224 56% 5%</span>;              <span class="dim">/* #050A14 — Deep */</span>
+--card: <span class="val">224 48% 9%</span>;                    <span class="dim">/* #0A1225 */</span>
+--popover: <span class="val">224 44% 11%</span>;               <span class="dim">/* #0D1730 */</span>
+
+<span class="cm">/* ═══ Semantic ═══ */</span>
+--success: <span style="color:#22c55e">142 71% 45%</span>;              <span class="dim">/* #22C55E */</span>
+--warning: <span style="color:#f59e0b">38 92% 50%</span>;               <span class="dim">/* #F59E0B */</span>
+--danger: <span style="color:#ef4444">0 84% 60%</span>;                <span class="dim">/* #EF4444 */</span>
+--info: <span style="color:#3b82f6">217 91% 60%</span>;               <span class="dim">/* #3B82F6 */</span>
+
+<span class="cm">/* ═══ Channels ═══ */</span>
+--whatsapp: <span style="color:#25d366">#25D366</span>;
+--instagram: <span style="color:#e1306c">#E1306C</span>;
+
+<span class="cm">/* ═══ Glass ═══ */</span>
+--glass-bg: <span class="val">0 0% 100% / 0.03</span>;
+--glass-border: <span class="val">0 0% 100% / 0.06</span>;
+--glass-blur: <span class="val">20px</span>;
+
+<span class="cm">/* ═══ Typography ═══ */</span>
+--font-sans: <span class="val">'Inter', sans-serif</span>;
+--font-mono: <span class="val">'JetBrains Mono', monospace</span>;
+
+<span class="cm">/* ═══ Radius ═══ */</span>
+--radius: <span class="val">0.75rem</span>;                    <span class="dim">/* 12px base */</span>
+
+<span class="cm">/* ═══ Neon Pulse Specific ═══ */</span>
+--neon-glow-sm: <span class="val">0 0 12px var(--glow-cyan)</span>;
+--neon-glow-md: <span class="val">0 0 24px var(--glow-cyan), 0 0 60px rgba(6,182,212,.04)</span>;
+--neon-glow-lg: <span class="val">0 0 30px var(--glow-cyan), 0 0 80px rgba(6,182,212,.06)</span>;
+--purple-glow: <span class="purp">0 0 20px rgba(139,92,246,.15)</span>;</div>
+  </div>
+</section>
+
+</div><!-- .page -->
+
+<footer>
+  <div class="page">
+    <p><strong>FlowPilot</strong> Brand Book Oficial — Neon Pulse v2.0 — Marco 2026</p>
+    <p style="margin-top:.4rem">Documento confidencial. Uso interno e parceiros autorizados.</p>
+  </div>
+</footer>
+
+</body>
+</html>

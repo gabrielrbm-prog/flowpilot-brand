@@ -1,0 +1,17 @@
+<svg viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10,8)">
+    <circle cx="32" cy="32" r="28" fill="none" stroke="url(#g)" stroke-width="1.5" opacity=".15"/>
+    <path d="M14 22 C20 27,24 30,28 32 C24 34,20 37,14 42" fill="none" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M24 14 C32 20,36 23,40 26 C36 29,32 32,24 38" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+    <path d="M34 24 C40 28,44 32,48 36 C44 40,40 42,34 46" fill="none" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+    <circle cx="32" cy="32" r="3.5" fill="#0891b2"/>
+  </g>
+  <text x="82" y="50" font-family="Inter,-apple-system,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="#0f172a">Flow</text>
+  <text x="190" y="50" font-family="Inter,-apple-system,sans-serif" font-weight="800" font-size="36" letter-spacing="-1.5" fill="url(#g)">Pilot</text>
+</svg>
